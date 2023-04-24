@@ -1,4 +1,4 @@
-const buttinDelElement = document.getElementById('del-button');
+const buttonDelElement = document.getElementById('del-button');
 const buttonElement = document.getElementById('add-button');
 const nameInputElement = document.getElementById("name-input");
 const commentInputElement = document.getElementById("comment-input");
@@ -45,3 +45,6 @@ return;
       </div>
     </li>`;
 });
+buttonDelElement.addEventListener ("click",  () => {
+    listElement.removeChild(listElement.lastElementChild);
+    });
