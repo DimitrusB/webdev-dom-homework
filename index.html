@@ -62,11 +62,11 @@
       </div>
     </div>
   </body>
-  <!-- <style>
+  <style>
     .error {
       background-color: rgb(234, 146, 146);
     }
-  </style> -->
+  </style>
   <script>
     "use strict";
     const buttonElement = document.getElementById('add-button');
@@ -77,10 +77,11 @@
     let time = new Date().toLocaleTimeString().slice(0,-3);
     buttonElement.addEventListener ('click', () => {
     
-//  if (nameInputElement === "" || commentInputElement === ""){
-//     nameInputElement.classList.add("error");
-//     return;
-//  }
+if (nameInputElement === ""){
+nameInputElement.classList.add("error");
+ return;
+
+ }
       const oldListHtml = listElement.innerHTML;
       listElement.innerHTML =
         oldListHtml +
