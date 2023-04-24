@@ -19,7 +19,7 @@ buttonElement.addEventListener ("keydown" && "click",  () => {
 if (nameInputElement.value === "" || commentInputElement.value === ""){
 buttonElement.disable = "true";
 return;
-}
+};
 const oldListHtml = listElement.innerHTML;
   listElement.innerHTML =
     oldListHtml +
