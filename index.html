@@ -59,6 +59,9 @@
         <div class="add-form-row">
           <button class="add-form-button" id="add-button">Написать</button>
         </div>
+        <div class="add-form-row">
+          <button class="add-form-button" id="del-button">Удалить послединий комментарий</button>
+        </div>
       </div>
     </div>
   </body>
@@ -67,44 +70,6 @@
       background-color: rgb(234, 146, 146);
     }
   </style>
-  <script>
-    "use strict";
-    const buttonElement = document.getElementById('add-button');
-    const nameInputElement = document.getElementById("name-input");
-    const commentInputElement = document.getElementById("comment-input");
-    const listElement = document.getElementById("list");
-    let dd = new Date().toLocaleDateString();
-    let time = new Date().toLocaleTimeString().slice(0,-3);
-    buttonElement.addEventListener ('click', () => {
-    
-if (nameInputElement === ""){
-nameInputElement.classList.add("error");
- return;
-
- }
-      const oldListHtml = listElement.innerHTML;
-      listElement.innerHTML =
-        oldListHtml +
-        `<li class="comment">
-          <div class="comment-header">
-            <div>
-              ${nameInputElement.value}
-            </div>
-            <div>${dd} ${time}</div>
-          </div>
-          <div  class="comment-body">
-            <div class="comment-text">
-              ${commentInputElement.value}
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span class="likes-counter">0</span>
-              <button class="like-button"></button>
-            </div>
-          </div>
-        </li>`;
-    });
-    console.log("It works!");
+  <script src="script.js">
   </script>
 </html>
