@@ -2,7 +2,8 @@ const buttonDelElement = document.getElementById('del-button');
 const buttonElement = document.getElementById('add-button');
 const nameInputElement = document.getElementById("name-input");
 const commentInputElement = document.getElementById("comment-input");
-const listElement = document.getElementById("list");
+const listElement = document.getElementById("list"); 
+const inputs = document.querySelectorAll('#name-input, #comment-input'); //для отчистки формы ввода после отправки данных
 const dd = new Date();
 let day = dd.getDate();
 let mon = dd.getMonth()+1;
@@ -42,6 +43,11 @@ const oldListHtml = listElement.innerHTML;
         </div>
       </div>
     </li>`;
+    // commentInputElement.value = "";
+    // nameInputElement.value = ""; 1ый вариант и второй ниже
+    inputs.forEach(input => {
+      input.value = '';
+    });
 });
 buttonDelElement.addEventListener ("click",  () => {
     listElement.removeChild(listElement.lastElementChild);
