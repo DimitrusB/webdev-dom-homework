@@ -1,75 +1,56 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <title>Проект "Комменты"</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="styles.css" />
+    <title>Книжки</title>
   </head>
 
   <body>
-    <div class="container">
-      <ul id="list" class="comments">
-        <li class="comment">
-          <div class="comment-header">
-            <div>Глеб Фокин</div>
-            <div>12.02.22 12:18</div>
-          </div>
-          <div  class="comment-body">
-            <div class="comment-text">
-              Это будет первый комментарий на этой странице
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span class="likes-counter">3</span>
-              <button class="like-button"></button>
-            </div>
-          </div>
-        </li>
-        <li class="comment">
-          <div class="comment-header">
-            <div>Варвара Н.</div>
-            <div>13.02.22 19:22</div>
-          </div>
-          <div class="comment-body">
-            <div class="comment-text">
-              Мне нравится как оформлена эта страница! ❤
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span class="likes-counter">75</span>
-              <button class="like-button -active-like"></button>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <div class="add-form">
-        <input id="name-input"
-          type="text"
-          class="add-form-name"
-          placeholder="Введите ваше имя"
-        />
-        <textarea id="comment-input"
-          type="textarea"
-          class="add-form-text"
-          placeholder="Введите ваш коментарий"
-          rows="4"
-        ></textarea>
-        <div class="add-form-row">
-          <button class="add-form-button" id="add-button">Написать</button>
-        </div>
-        <div class="add-form-row">
-          <button class="add-form-button" id="del-button">Удалить послединий комментарий</button>
-        </div>
-      </div>
-    </div>
+    <div id="books">Заглушка</div>
+    <button id="show-button">Посмотреть книги</button>
   </body>
-  <style>
-    .error {
-      background-color: rgb(234, 146, 146);
-    }
-  </style>
-  <script src="script.js">
+
+  <script>
+    const books = [
+      {
+        title: "Искусство программирования",
+        price: 1300,
+      },
+      {
+        title: "Тихо!",
+        price: 700,
+      },
+      {
+        title: "Ночной дозор",
+        price: 980,
+      },
+    ];
+
+    let totalPrice = 0;
+for (el of books){
+    totalPrice +=el.price;
+}
+    /* Допишите код: используйте цикл for...of, чтобы посчитать общую стоимость книг в массиве books */
+
+    // // Должен выводить в консоль 2980
+    console.log(totalPrice);
+
+    // /* Допишите код: используйте методы массива map + join, чтобы получить строчку — список всех книг через запятую */
+    const booksList = books.map((item)  => (item.title) ).join(',');
+
+    // // Должен выводить строку "Искусство программирования, Тихо!, Ночной дозор"
+    console.log(booksList)
+
+    /*
+     * Допишите код:
+     * Используйте document.getElementById, innerHtml и addEventListener,
+     * чтобы при клике на кнопку текст «Заглушка» на странице изменялся на
+     * «Искусство программирования, Тихо!, Ночной дозор = 2980 рублей»
+     * */
+    const buttonElement = document.getElementById('show-button');
+    const booksElement = document.getElementById("books");
+    buttonElement.addEventListener("click", () => {
+
+      booksElement.innerHTML = `${booksList} = Итого: ${totalPrice} рублей`;
+    });
   </script>
 </html>
