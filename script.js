@@ -20,8 +20,6 @@ const comments = [
   }
 ];
 
-
-
 const dd = new Date();
 let day = dd.getDate();
 let mon = dd.getMonth()+1;
@@ -34,6 +32,28 @@ if (day <10){
 const year = dd.getFullYear() - 2000;
 let time = new Date().toLocaleTimeString().slice(0,-3);
 
+const initLikesButton = () =>{
+  const likesButton = document.querySelectorAll(".like-button");
+for (const likeInit of likesButton){
+  likeInit.addEventListener('click', () =>{
+  if (likeInit.classList.contains("-active-like") === true){
+    const counterLike = likeInit.parentNode.querySelectorAll(".likes-counter");
+    if (counterLike === 0) return;
+      counterLike[0].innerHTML = parseInt(counterLike[0].innerHTML)-1;
+      likeInit.classList.remove('-active-like');
+  
+    }else{
+      likeInit.classList.add('-active-like');
+      const counterLike = likeInit.parentNode.querySelectorAll(".likes-counter");
+      if (counterLike === 0) return;
+      counterLike[0].innerHTML = parseInt(counterLike[0].innerHTML)+1;
+    }
+});
+};
+};
+
+
+
 const renderComments = () =>{
   const commentsHtml = comments.map((comm, index) =>{
 return     `<li class="comment">
@@ -45,7 +65,7 @@ return     `<li class="comment">
 </div>
 <div  class="comment-body">
   <div class="comment-text">
-    ${comm.comment}
+    ${comm.comment}    
   </div>
 </div>
 <div class="comment-footer">
@@ -54,9 +74,11 @@ return     `<li class="comment">
     <button class="like-button"></button>
   </div>
 </div>
+<button class="edit-form-button" id="edit-button">Редактировать</button>
 </li>`;
   }).join('');
   listElement.innerHTML = commentsHtml;
+  initLikesButton();
 };
 
 renderComments();
@@ -74,13 +96,13 @@ buttonElement.addEventListener ("keydown" && "click",  () => {
     like: "0"
      
   });
+  initLikesButton();
 renderComments();
 inputs.forEach(input => {
   input.value = '';
 });
   });
 
-
-buttonDelElement.addEventListener ("click",  () => {
+  buttonDelElement.addEventListener ("click",  () => {
     listElement.removeChild(listElement.lastElementChild);
     });

@@ -97,6 +97,7 @@ body {
     display: flex;
     flex-direction: column;
   }
+  
 
   .add-form-name,
   .add-form-text {
@@ -131,7 +132,18 @@ body {
     border-radius: 18px;
     cursor: pointer;
   }
-
+  .edit-form-button {
+    margin-top: 24px;
+    font-size: 15px;
+    padding: 10px 20px;
+    background-color: #bcec30;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+  }
+  .edit-form-button:hover {
+    opacity: 0.9;
+  }
   .add-form-button:hover {
     opacity: 0.9;
   }
