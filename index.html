@@ -9,26 +9,26 @@
   <body>
     <h1>Любимые цвета студентов</h1>
     <ul class="students" id="list">
-      <li class="student" data-color="Красный" data-hi="Привет,">
+      <li class="student" data-color="#ff2600">
         <p class="student-name">
           Глеб, любимый цвет
           <span style="color: #ff2600;">#ff2600</span>
         </p>
-        <button id="hi">Приветствие</button>
+        <button data-name="Глеб">Привет</button>
       </li>
-      <li class="student" data-color="#00f900" data-hi="Привет,">
+      <li class="student" data-color="#00f900">
         <p class="student-name">
           Иван, любимый цвет
           <span style="color: #00f900;">#00f900</span>
         </p>
-        <button id="hi">Приветствие</button>
+        <button data-name="Иван">Привет</button>
       </li>
-      <li class="student" data-color="#0432ff" data-hi="Привет,">
+      <li class="student" data-color="#0432ff">
         <p class="student-name">
           Люси, любимый цвет
           <span style="color: #0432ff;"> #0432ff</span>
         </p>
-        <button id="hi">Приветствие</button>
+        <button data-name="43564563">Привет</button>
       </li>
     </ul>
 
@@ -57,16 +57,8 @@
     const listElement = document.getElementById("list");
     const nameInputElement = document.getElementById("name-input");
     const colorInputElement = document.getElementById("color-input");
-    // const allBody = document.querySelectorAll("body");
 
     const studentElements = document.querySelectorAll(".student");
-
-    // самлстоятельное задание
-    // const bodyElement = allBody[0];
-    // colorInputElement.addEventListener("click", () => {
-    //   bodyElement.style.backgroundColor = "#ff2600";
-    // }); 
-
 
     // Добавляет обработчики кликов ко всем элементам с классом student
     const initEventListeners = () => {
@@ -78,17 +70,16 @@
         // Добавляет обработчик клика на конкретный элемент в списке
         studentElement.addEventListener("click", () => {
           // Достает data-color из элемента
-          const color = studentElement.dataset.color;
-          console.log(color);
-          const buttonHello = studentElement.dataset.hi;
-          alert(studentElements.value);
+          // const color = studentElement.dataset.color;
+          // console.log(color);
+          const name = String(studentElement.dataset.name);
+          alert(`Привет ${name}`);
+          return;
         });
       }
     };
 
     initEventListeners();
-
-
 
     buttonElement.addEventListener("click", () => {
       nameInputElement.classList.remove("input-error");
@@ -105,7 +96,7 @@
               ${nameInputElement.value}, любимый цвет
               <span style="color: ${colorInputElement.value}"> ${colorInputElement.value}</span>
             </p>
-            <button id="hi">Приветствие</button>
+            <button data-name="${nameInputElement.value}"> Привет </button>
           </li>`;
 
       initEventListeners();
