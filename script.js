@@ -41,7 +41,7 @@ return     `<li class="comment">
   <div>
     ${comm.name}
   </div>
-  <div>${day}.${mon}.${year} ${time}</div>
+  <div>${comm.date}</div>
 </div>
 <div  class="comment-body">
   <div class="comment-text">
@@ -69,41 +69,18 @@ buttonElement.addEventListener ("keydown" && "click",  () => {
   }
   comments.push({
     name: nameInputElement.value,
-    date: dd.value,
+    date: `${day}.${mon}.${year} ${time}`,
     comment: commentInputElement.value,
-    
+    like: "0"
+     
   });
 renderComments();
-  };
-
-const oldListHtml = listElement.innerHTML;
-  listElement.innerHTML =
-    oldListHtml +
-    `<li class="comment">
-      <div class="comment-header">
-        <div>
-          ${nameInputElement.value}
-        </div>
-        <div>${day}.${mon}.${year} ${time}</div>
-      </div>
-      <div  class="comment-body">
-        <div class="comment-text">
-          ${commentInputElement.value}
-        </div>
-      </div>
-      <div class="comment-footer">
-        <div class="likes">
-          <span class="likes-counter">0</span>
-          <button class="like-button"></button>
-        </div>
-      </div>
-    </li>`;
-    // commentInputElement.value = "";
-    // nameInputElement.value = ""; 1ый вариант и второй ниже
-    inputs.forEach(input => {
-      input.value = '';
-    });
+inputs.forEach(input => {
+  input.value = '';
 });
+  });
+
+
 buttonDelElement.addEventListener ("click",  () => {
     listElement.removeChild(listElement.lastElementChild);
     });
