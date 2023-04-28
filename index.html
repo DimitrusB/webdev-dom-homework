@@ -9,19 +9,19 @@
   <body>
     <h1>Любимые цвета студентов</h1>
     <ul class="students" id="list">
-      <li class="student">
+      <li class="student" data-color="Красный">
         <p class="student-name">
           Глеб, любимый цвет
           <span style="color: #ff2600;">#ff2600</span>
         </p>
       </li>
-      <li class="student">
+      <li class="student" data-color="#00f900">
         <p class="student-name">
           Иван, любимый цвет
           <span style="color: #00f900;">#00f900</span>
         </p>
       </li>
-      <li class="student">
+      <li class="student" data-color="#0432ff">
         <p class="student-name">
           Люси, любимый цвет
           <span style="color: #0432ff;"> #0432ff</span>
@@ -60,12 +60,20 @@
     colorInputElement.addEventListener("click", () => {
       bodyElement.style.backgroundColor = "#ff2600";
     });
+
+
+    // Добавляет обработчики кликов ко всем элементам с классом student
     const initEventListeners = () => {
+      // Находит все элементы с классом student в разметке
       const studentElements = document.querySelectorAll(".student");
 
+      // Цикл for проходит по каждому элементу в списке
       for (const studentElement of studentElements) {
+        // Добавляет обработчик клика на конкретный элемент в списке
         studentElement.addEventListener("click", () => {
-          console.log(1);
+          // Достает data-color из элемента
+          const color = studentElement.dataset.color;
+          console.log(color);
         });
       }
     };
@@ -82,7 +90,7 @@
 
       listElement.innerHTML =
         listElement.innerHTML +
-        `<li class="student">
+        `<li class="student" data-color="${colorInputElement.value}">
             <p class="student-name">
               ${nameInputElement.value}, любимый цвет
               <span style="color: ${colorInputElement.value}"> ${colorInputElement.value}</span>
