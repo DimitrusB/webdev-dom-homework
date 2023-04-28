@@ -75,6 +75,15 @@ body {
   border: none;
   cursor: pointer;
 }
+.year-input {
+  border: 1px solid rgba(120, 120, 120, 1);
+  border-radius: 2px;
+  padding: 4px;
+  background-color: whitesmoke;
+  height: 26px;
+  box-sizing: border-box;
+  width: 100%;
+}
 
 .input-error {
   background-color: rgb(241, 177, 177);

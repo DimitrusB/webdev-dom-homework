@@ -23,6 +23,14 @@
           placeholder="Василий"
         />
       </div>
+      Год рождения:&nbsp;&nbsp;
+      <input
+      type="text"
+      id="year-input"
+      class="input"
+      placeholder="2010"
+    />
+  </div>
       <div class="form-row">
         Цвет:&nbsp;
         <input type="color" id="color-input" class="color-input input" />
@@ -37,20 +45,23 @@
     const listElement = document.getElementById("list");
     const nameInputElement = document.getElementById("name-input");
     const colorInputElement = document.getElementById("color-input");
-
+    const yearsElement = document.getElementById("year-input");
     const studentElements = document.querySelectorAll(".student");
 
     const students = [
       {
         name: "Глеб",
+        year: "1999",
         color: "#ff2600"
       },
       {
         name: "Иван",
+        year: "1993",
         color: "#00f900"
       },
       {
         name: "Люси",
+        year: "1995",
         color: "#0432ff"
       }
     ];
@@ -90,7 +101,7 @@
         .map((student, index) => {
           return `<li class="student" data-color="${student.color}">
             <p class="student-name">
-              ${student.name}, любимый цвет
+              ${student.name}, год рождения ${student.year}, любимый цвет
               <span style="color: ${student.color}"> ${student.color}</span>
             </p>
             <button data-index="${index}" class="delete-button">Удалить</button>
@@ -108,20 +119,27 @@
 
     buttonElement.addEventListener("click", () => {
       nameInputElement.classList.remove("input-error");
+      yearsElement.classList.remove("input-error");
 
       if (nameInputElement.value === "") {
         nameInputElement.classList.add("input-error");
         return;
       }
+      if (yearsElement.value === "") {
+        yearsElement.classList.add("input-error");
+        return;
+      }
 
       students.push({
         name: nameInputElement.value,
+        year: yearsElement.value,
         color: colorInputElement.value
       });
 
       renderStudents();
 
       nameInputElement.value = "";
+      yearsElement.value = "";
     });
   </script>
 </html>
