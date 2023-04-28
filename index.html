@@ -1,56 +1,97 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Книжки</title>
+    <title>Урок "Динамические обработчики событий и всплытие"</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body>
-    <div id="books">Заглушка</div>
-    <button id="show-button">Посмотреть книги</button>
+    <h1>Любимые цвета студентов</h1>
+    <ul class="students" id="list">
+      <li class="student">
+        <p class="student-name">
+          Глеб, любимый цвет
+          <span style="color: #ff2600;">#ff2600</span>
+        </p>
+      </li>
+      <li class="student">
+        <p class="student-name">
+          Иван, любимый цвет
+          <span style="color: #00f900;">#00f900</span>
+        </p>
+      </li>
+      <li class="student">
+        <p class="student-name">
+          Люси, любимый цвет
+          <span style="color: #0432ff;"> #0432ff</span>
+        </p>
+      </li>
+    </ul>
+
+    <div class="form">
+      <h3 class="form-title">Форма добавления</h3>
+      <div class="form-row">
+        Имя:&nbsp;&nbsp;
+        <input
+          type="text"
+          id="name-input"
+          class="input"
+          placeholder="Василий"
+        />
+      </div>
+      <div class="form-row">
+        Цвет:&nbsp;
+        <input type="color" id="color-input" class="color-input input" />
+        <br /><br />
+      </div>
+      <button class="button" id="add-button">Добавить</button>
+    </div>
   </body>
 
   <script>
-    const books = [
-      {
-        title: "Искусство программирования",
-        price: 1300,
-      },
-      {
-        title: "Тихо!",
-        price: 700,
-      },
-      {
-        title: "Ночной дозор",
-        price: 980,
-      },
-    ];
+    const buttonElement = document.getElementById("add-button");
+    const listElement = document.getElementById("list");
+    const nameInputElement = document.getElementById("name-input");
+    const colorInputElement = document.getElementById("color-input");
+    const allBody = document.querySelectorAll("body");
+    const bodyElement = allBody[0];
+    const studentElements = document.querySelectorAll(".student");
+    colorInputElement.addEventListener("click", () => {
+      bodyElement.style.backgroundColor = "#ff2600";
+    });
+    const initEventListeners = () => {
+      const studentElements = document.querySelectorAll(".student");
 
-    let totalPrice = 0;
-for (el of books){
-    totalPrice +=el.price;
-}
-    /* Допишите код: используйте цикл for...of, чтобы посчитать общую стоимость книг в массиве books */
+      for (const studentElement of studentElements) {
+        studentElement.addEventListener("click", () => {
+          console.log(1);
+        });
+      }
+    };
 
-    // // Должен выводить в консоль 2980
-    console.log(totalPrice);
+    initEventListeners();
 
-    // /* Допишите код: используйте методы массива map + join, чтобы получить строчку — список всех книг через запятую */
-    const booksList = books.map((item)  => (item.title) ).join(',');
-
-    // // Должен выводить строку "Искусство программирования, Тихо!, Ночной дозор"
-    console.log(booksList)
-
-    /*
-     * Допишите код:
-     * Используйте document.getElementById, innerHtml и addEventListener,
-     * чтобы при клике на кнопку текст «Заглушка» на странице изменялся на
-     * «Искусство программирования, Тихо!, Ночной дозор = 2980 рублей»
-     * */
-    const buttonElement = document.getElementById('show-button');
-    const booksElement = document.getElementById("books");
     buttonElement.addEventListener("click", () => {
+      nameInputElement.classList.remove("input-error");
 
-      booksElement.innerHTML = `${booksList} = Итого: ${totalPrice} рублей`;
+      if (nameInputElement.value === "") {
+        nameInputElement.classList.add("input-error");
+        return;
+      }
+
+      listElement.innerHTML =
+        listElement.innerHTML +
+        `<li class="student">
+            <p class="student-name">
+              ${nameInputElement.value}, любимый цвет
+              <span style="color: ${colorInputElement.value}"> ${colorInputElement.value}</span>
+            </p>
+          </li>`;
+
+      initEventListeners();
+
+      nameInputElement.value = "";
     });
   </script>
 </html>
