@@ -147,3 +147,6 @@ body {
   .add-form-button:hover {
     opacity: 0.9;
   }
+  .input-error {
+    background-color: rgb(241, 177, 177);
+  }

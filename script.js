@@ -10,17 +10,21 @@ const comments = [
    date: "12.02.22 12:18",
    name: "Глеб Фокин",
    comment: "Это будет первый комментарий на этой странице",
-   like: "3"
+   like: "3",
+   isEdit: false
   },
   {
     date: "13.02.22 19:22",
     name: "Варвара Н.",
     comment: "Мне нравится как оформлена эта страница! ❤",
-    like: "75"
+    like: "75",
+    isEdit: false
   }
 ];
+for(el of comments)
+console.log(el.isEdit);
 
-const dd = new Date();
+let dd = new Date();
 let day = dd.getDate();
 let mon = dd.getMonth()+1;
 if (mon<10){
@@ -52,6 +56,17 @@ for (const likeInit of likesButton){
 };
 };
 
+initButEdit = () =>{
+  const buttEdit = document.getElementById ('edit-button');
+  buttEdit.addEventListener("click", () =>{
+    for (const el of comments){
+    if (el.isEdit === false){
+      buttEdit.classList.add("input-error")
+    }
+    return ;
+    }
+    });
+  };
 
 
 const renderComments = () =>{
@@ -77,8 +92,10 @@ return     `<li class="comment">
 <button class="edit-form-button" id="edit-button">Редактировать</button>
 </li>`;
   }).join('');
+  console.log(commentsHtml);
   listElement.innerHTML = commentsHtml;
   initLikesButton();
+  initButEdit();
 };
 
 renderComments();
@@ -93,10 +110,11 @@ buttonElement.addEventListener ("keydown" && "click",  () => {
     name: nameInputElement.value,
     date: `${day}.${mon}.${year} ${time}`,
     comment: commentInputElement.value,
-    like: "0"
-     
+    like: "0",
+    isEdit: false
   });
-  initLikesButton();
+
+
 renderComments();
 inputs.forEach(input => {
   input.value = '';
@@ -106,3 +124,6 @@ inputs.forEach(input => {
   buttonDelElement.addEventListener ("click",  () => {
     listElement.removeChild(listElement.lastElementChild);
     });
+
+
+
