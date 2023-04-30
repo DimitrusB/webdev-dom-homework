@@ -58,21 +58,24 @@ const initLikesButton = () => {
 const initEditButton = ()=>{
   const editButtonElements = document.querySelectorAll('.edit-form-button');
   for ( let i=0; i < editButtonElements.length; i++){
+    console.log(comments[i].comment)
     editButtonElements[i].addEventListener('click', () => {
       console.log(comments[i]);
       if (comments[i].isEdit === false){
-        comments[i].isEdit = true;
-        commentr = comments[i].comment.map(() =>{ return `<textarea>${comments[i].comment}</textarea>`}) ;
-
+        comments[i].isEdit = true
+        comments[i].comment = `<textarea id="comment-input"
+        type="textarea"
+        class="add-form-text"
+        rows="4">${comments[i].comment}</textarea>`;
        }
       else if (comments[i].isEdit === true){
         comments[i].isEdit = false;
         comments[i].comment.innerHTML =   `<div class="comment-text">${comments[i].comment}</div>`;
-      }
+      };
       renderComments();
     });
     
-  ;}
+  };
 };
 
 const renderComments = () =>{
