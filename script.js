@@ -73,7 +73,7 @@ return     `<li class="comment">
     <button class="${comm.isLiked ? 'like-button -active-like' : 'like-button'}"></button>
   </div>
 </div>
-//<button class="edit-form-button" id="edit-button">Редактировать</button>
+<button class="edit-form-button" id="edit-button">Редактировать</button>
 </li>`;
   }).join('');
   listElement.innerHTML = commentsHtml;
