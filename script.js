@@ -12,6 +12,7 @@ const comments = [
    comment: "Это будет первый комментарий на этой странице",
    likes: 3,
    isLiked: false,
+   isEdit: false,
   },
   {
     date: "13.02.22 19:22",
@@ -19,6 +20,7 @@ const comments = [
     comment: "Мне нравится как оформлена эта страница! ❤",
     likes: 75,
     isLiked: true,
+    isEdit: false,
   }
 ];
 
@@ -53,6 +55,26 @@ const initLikesButton = () => {
   }
 };
 
+const initEditButton = ()=>{
+  const editButtonElements = document.querySelectorAll('.edit-form-button');
+  for ( let i=0; i < editButtonElements.length; i++){
+    editButtonElements[i].addEventListener('click', () => {
+      console.log(comments[i]);
+      if (comments[i].isEdit === false){
+        comments[i].isEdit = true;
+        commentr = comments[i].comment.map(() =>{ return `<textarea>${comments[i].comment}</textarea>`}) ;
+
+       }
+      else if (comments[i].isEdit === true){
+        comments[i].isEdit = false;
+        comments[i].comment.innerHTML =   `<div class="comment-text">${comments[i].comment}</div>`;
+      }
+      renderComments();
+    });
+    
+  ;}
+};
+
 const renderComments = () =>{
   const commentsHtml = comments.map((comm, index) =>{
 return     `<li class="comment">
@@ -78,6 +100,7 @@ return     `<li class="comment">
   }).join('');
   listElement.innerHTML = commentsHtml;
   initLikesButton();
+  initEditButton();
 };
 
 renderComments();
@@ -94,9 +117,9 @@ buttonElement.addEventListener ("keydown" && "click",  () => {
     comment: commentInputElement.value,
     likes: 0,
     isLiked: false,
-     
+    isEdit: false,
   });
-  initLikesButton();
+
 renderComments();
 inputs.forEach(input => {
   input.value = '';
