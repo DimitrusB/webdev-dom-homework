@@ -10,21 +10,19 @@ const comments = [
    date: "12.02.22 12:18",
    name: "Глеб Фокин",
    comment: "Это будет первый комментарий на этой странице",
-   like: "3",
-   isEdit: false
+   likes: 3,
+   isLiked: false,
   },
   {
     date: "13.02.22 19:22",
     name: "Варвара Н.",
     comment: "Мне нравится как оформлена эта страница! ❤",
-    like: "75",
-    isEdit: false
+    likes: 75,
+    isLiked: true,
   }
 ];
-for(el of comments)
-console.log(el.isEdit);
 
-let dd = new Date();
+const dd = new Date();
 let day = dd.getDate();
 let mon = dd.getMonth()+1;
 if (mon<10){
@@ -36,38 +34,24 @@ if (day <10){
 const year = dd.getFullYear() - 2000;
 let time = new Date().toLocaleTimeString().slice(0,-3);
 
-const initLikesButton = () =>{
-  const likesButton = document.querySelectorAll(".like-button");
-for (const likeInit of likesButton){
-  likeInit.addEventListener('click', () =>{
-  if (likeInit.classList.contains("-active-like") === true){
-    const counterLike = likeInit.parentNode.querySelectorAll(".likes-counter");
-    if (counterLike === 0) return;
-      counterLike[0].innerHTML = parseInt(counterLike[0].innerHTML)-1;
-      likeInit.classList.remove('-active-like');
-  
-    }else{
-      likeInit.classList.add('-active-like');
-      const counterLike = likeInit.parentNode.querySelectorAll(".likes-counter");
-      if (counterLike === 0) return;
-      counterLike[0].innerHTML = parseInt(counterLike[0].innerHTML)+1;
-    }
-});
-};
-};
-
-initButEdit = () =>{
-  const buttEdit = document.getElementById ('edit-button');
-  buttEdit.addEventListener("click", () =>{
-    for (const el of comments){
-    if (el.isEdit === false){
-      buttEdit.classList.add("input-error")
-    }
-    return ;
-    }
+const initLikesButton = () => {
+  const likeButtonsElements = document.querySelectorAll('.like-button');
+  // пройдемся по всем кнопкам и добавим слушателя клика
+  for (let i = 0; i < likeButtonsElements.length; i++) {
+    likeButtonsElements[i].addEventListener('click', () => {
+      console.log(comments[i]);
+      // если комментарий не лайкнут, то отмечаем лайк (свойство isLiked) и увеличиваем счетчик
+      if (comments[i].isLiked === false) {
+        comments[i].isLiked = true;
+        comments[i].likes += 1;
+      } else if (comments[i].isLiked === true) {
+        comments[i].isLiked = false;
+        comments[i].likes -= 1;
+      }
+      renderComments();
     });
-  };
-
+  }
+};
 
 const renderComments = () =>{
   const commentsHtml = comments.map((comm, index) =>{
@@ -85,17 +69,15 @@ return     `<li class="comment">
 </div>
 <div class="comment-footer">
   <div class="likes">
-    <span class="likes-counter">${comm.like}</span>
-    <button class="like-button"></button>
+    <span class="likes-counter">${comm.likes}</span>
+    <button class="${comm.isLiked ? 'like-button -active-like' : 'like-button'}"></button>
   </div>
 </div>
-<button class="edit-form-button" id="edit-button">Редактировать</button>
+//<button class="edit-form-button" id="edit-button">Редактировать</button>
 </li>`;
   }).join('');
-  console.log(commentsHtml);
   listElement.innerHTML = commentsHtml;
   initLikesButton();
-  initButEdit();
 };
 
 renderComments();
@@ -110,11 +92,11 @@ buttonElement.addEventListener ("keydown" && "click",  () => {
     name: nameInputElement.value,
     date: `${day}.${mon}.${year} ${time}`,
     comment: commentInputElement.value,
-    like: "0",
-    isEdit: false
+    likes: 0,
+    isLiked: false,
+     
   });
-
-
+  initLikesButton();
 renderComments();
 inputs.forEach(input => {
   input.value = '';
@@ -124,6 +106,3 @@ inputs.forEach(input => {
   buttonDelElement.addEventListener ("click",  () => {
     listElement.removeChild(listElement.lastElementChild);
     });
-
-
-
