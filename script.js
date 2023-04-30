@@ -70,13 +70,20 @@ const initEditButton = ()=>{
        }
       else if (comments[i].isEdit === true){
         comments[i].isEdit = false;
-        comments[i].comment.innerHTML =   `<div class="comment-text">${comments[i].comment}</div>`;
+        const renderEdit = () =>{
+          const editHtml = comments[i].comment.map((el) =>{
+            `<div class="comment-text">${el.comment}</div>`;
+          }).join('');
+          comments[i].comment = editHtml;
+        };
+        renderComments();
+        renderEdit();
+        };
+      });
       };
-      renderComments();
-    });
-    
-  };
-};
+    };
+
+
 
 const renderComments = () =>{
   const commentsHtml = comments.map((comm, index) =>{
