@@ -63,20 +63,19 @@ const initEditButton = ()=>{
       console.log(comments[i]);
       if (comments[i].isEdit === false){
         comments[i].isEdit = true
-        comments[i].comment = `<textarea id="comment-input"
-        type="textarea"
-        class="add-form-text"
-        rows="4"> ${comments[i].comment} </textarea>`;
-        console.log(comments[i].comment)
-       }
+        const  comt = comments.map((el,ind) =>{ return `<textarea id="comment-input" type="textarea" class="add-form-text" rows="4"> ${el[i].comment} </textarea>`;}).join('');
+        comments[i].comment.innerHTML = el[i].comment;
+        console.log(el[i].comment);
+        
+      }
       else if (comments[i].isEdit === true){
         comments[i].isEdit = false;
-          comments[i].comment=`<div class="comment-text">gbgfbnfgn</div>`;
+          comments[i].comment=`<div class="comment-text">${comments[i].comment}</div>`;
         };
         renderComments();
       });
 
-      };
+    };
       };
   
 
