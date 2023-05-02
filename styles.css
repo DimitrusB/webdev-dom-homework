@@ -142,6 +142,7 @@ body {
     cursor: pointer;
   }
   .okedit-button {
+    content: "Сохранить";
     margin-top: 24px;
     font-size: 15px;
     padding: 10px 20px;

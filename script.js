@@ -63,22 +63,22 @@ const initEditButton = ()=>{
       console.log(comments[i]);
       if (comments[i].isEdit === false){
         comments[i].isEdit = true
-        const  comt = comments.map((el,ind) =>{ return `<textarea id="comment-input" type="textarea" class="add-form-text" rows="4"> ${el[i].comment} </textarea>`;}).join('');
-        comments[i].comment.innerHTML = el[i].comment;
-        console.log(el[i].comment);
-        
+        const renderEdit = ()=>{
+          const  comt = comments.map((el) =>{return `<textarea id="comment-input" type="textarea" class="add-form-text" rows="4">${el[i].comment}</textarea>`;})
+         // comments[i].comment.innerHTML = el[i].comment;
+          comments[i].comment.innerHTML = el[i].comment;
+          console.log(el[i].comment);
+        };
       }
       else if (comments[i].isEdit === true){
         comments[i].isEdit = false;
           comments[i].comment=`<div class="comment-text">${comments[i].comment}</div>`;
-        };
-        renderComments();
-      });
-
-    };
       };
+        renderComments();
+    });
+  };
+};
   
-
 
 
 const renderComments = () =>{
@@ -101,7 +101,7 @@ return     `<li class="comment">
     <button class="${comm.isLiked ? 'like-button -active-like' : 'like-button'}"></button>
   </div>
 </div>
-<button class="edit-form-button" id="edit-button">Редактировать</button>
+<button class="${comm.isEdit ? 'okedit-button' : 'edit-form-button'}"> Редактировать</button>
 </li>`;
   }).join('');
   listElement.innerHTML = commentsHtml;
