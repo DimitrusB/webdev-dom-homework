@@ -67,13 +67,13 @@ const initEditButton = ()=>{
         type="textarea"
         class="add-form-text"
         rows="4">${comments[i].comment}</textarea>`;
-       }
+       };
       else if (comments[i].isEdit === true){
         comments[i].isEdit = false;
         const renderEdit = () =>{
-          const editHtml = comments[i].comment.map((el) =>{
+          comments[i].comment=
             `<div class="comment-text">${el.comment}</div>`;
-          }).join('');
+
           comments[i].comment = editHtml;
         };
         renderComments();
