@@ -66,19 +66,19 @@ const initEditButton = ()=>{
         comments[i].comment = `<textarea id="comment-input"
         type="textarea"
         class="add-form-text"
-        rows="4">${comments[i].comment}</textarea>`;
-       };
+        rows="4"> ${comments[i].comment} </textarea>`;
+       }
       else if (comments[i].isEdit === true){
         comments[i].isEdit = false;
         const renderEdit = () =>{
           comments[i].comment=
             `<div class="comment-text">${el.comment}</div>`;
 
-          comments[i].comment = editHtml;
+          comments[i].comment = editHtml.join('');
         };
-        renderComments();
-        renderEdit();
-        };
+
+      };
+      renderComments();
       });
       };
     };
