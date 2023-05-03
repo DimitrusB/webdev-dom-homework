@@ -63,18 +63,21 @@ const initEditButton = ()=>{
       console.log(comments[i]);
       if (comments[i].isEdit === false){
         comments[i].isEdit = true
-        const renderEdit = ()=>{
-          const  comt = comments.map((el) =>{return `<textarea id="comment-input" type="textarea" class="add-form-text" rows="4">${el[i].comment}</textarea>`;})
-         // comments[i].comment.innerHTML = el[i].comment;
-          comments[i].comment.innerHTML = el[i].comment;
-          console.log(el[i].comment);
-        };
+
+          const newCommentTag = `<textarea id="comment-input" type="textarea" class="add-form-text" rows="4">${comments[i].comment}</textarea><button>123213132123</button>`;
+
+          const comment = document.getElementsByClassName('comment')[i];
+          comment.innerHTML = newCommentTag;
+
+
+          console.log(comments[i].comment);
+
       }
       else if (comments[i].isEdit === true){
         comments[i].isEdit = false;
           comments[i].comment=`<div class="comment-text">${comments[i].comment}</div>`;
       };
-        renderComments();
+        //renderComments();
     });
   };
 };
