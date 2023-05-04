@@ -12,7 +12,7 @@ const comments = [
    comment: "Это будет первый комментарий на этой странице",
    likes: 3,
    isLiked: false,
-   isEdit: true,
+   isEdit: false,
   },
   {
     date: "13.02.22 19:22",
