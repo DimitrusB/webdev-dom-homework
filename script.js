@@ -39,7 +39,7 @@ const initLikesButton = () => {
   // пройдемся по всем кнопкам и добавим слушателя клика
   for (let i = 0; i < likeButtonsElements.length; i++) {
     likeButtonsElements[i].addEventListener('click', () => {
-      console.log(comments[i]);
+      // console.log(comments[i]);
       // если комментарий не лайкнут, то отмечаем лайк (свойство isLiked) и увеличиваем счетчик
       if (comments[i].isLiked === false) {
         comments[i].isLiked = true;
