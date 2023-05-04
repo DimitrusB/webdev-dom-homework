@@ -12,7 +12,7 @@ const comments = [
    comment: "Это будет первый комментарий на этой странице",
    likes: 3,
    isLiked: false,
-   isEdit: false,
+   isEdit: true,
   },
   {
     date: "13.02.22 19:22",
@@ -62,22 +62,25 @@ const initEditButton = ()=>{
     editButtonElements[i].addEventListener('click', () => {
       console.log(comments[i]);
       if (comments[i].isEdit === false){
-        comments[i].isEdit = true
-
-          const newCommentTag = `<textarea id="comment-input" type="textarea" class="add-form-text" rows="4">${comments[i].comment}</textarea><button>123213132123</button>`;
-
+        comments[i].isEdit = true;
+          const newCommentTag = `<textarea id="comment-input" type="textarea" class="add-form-text" rows="4">${comments[i].comment}</textarea><div><button class="save-button">Сохранить</button></div>`;
           const comment = document.getElementsByClassName('comment')[i];
           comment.innerHTML = newCommentTag;
-
-
-          console.log(comments[i].comment);
-
+          // console.log(comments[i].comment);
       }
       else if (comments[i].isEdit === true){
-        comments[i].isEdit = false;
-          comments[i].comment=`<div class="comment-text">${comments[i].comment}</div>`;
+        const saveButtonElement = document.querySelectorAll('.save-button');
+        for(let i=0; i < saveButtonElement.length; i++){
+
+          saveButtonElement[i].addEventListener('click', () => {
+          const newSaveTag=`<div class="comment-text">${comments[i].comment}</div>`;
+          comment.innerHTML = newSaveTag;
+          comments[i].isEdit = false;
+        });
+        }
+  
       };
-        //renderComments();
+        // renderComments();
     });
   };
 };
@@ -104,7 +107,7 @@ return     `<li class="comment">
     <button class="${comm.isLiked ? 'like-button -active-like' : 'like-button'}"></button>
   </div>
 </div>
-<button class="${comm.isEdit ? 'okedit-button' : 'edit-form-button'}"> Редактировать</button>
+<button class="edit-form-button"> Редактировать</button>
 </li>`;
   }).join('');
   listElement.innerHTML = commentsHtml;
