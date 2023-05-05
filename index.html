@@ -90,7 +90,8 @@
       const deleteButtonsElements = document.querySelectorAll(".delete-button");
 
       for (const deleteButtonElement of deleteButtonsElements) {
-        deleteButtonElement.addEventListener("click", () => {
+        deleteButtonElement.addEventListener("click", (even) => {
+          event.stopPropagation();//остановка распространенияя далее по DOM
           // План удаления
           // 1. (+) Мы храним список студентов в js массиве
           // 2. (+) При клике мы удаляем нужный элемент из массива
