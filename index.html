@@ -48,6 +48,12 @@
     const yearsElement = document.getElementById("year-input");
     const studentElements = document.querySelectorAll(".student");
 
+    //     const elementsHtml = document.querySelector("html");
+
+    // elementsHtml.addEventListener("click", () =>{
+    //   alert("HI");
+    // });
+
     const students = [
       {
         name: "Глеб",
@@ -92,6 +98,14 @@
           const index = deleteButtonElement.dataset.index;
           students.splice(index, 1);
           renderStudents();
+        });
+      }
+      const elementsStudents = document.querySelectorAll(".student");
+
+      for (const student of elementsStudents) {
+        student.addEventListener("click", () => {
+          const color = student.dataset.color;
+          alert(`Любимый цвет студента: ${color}`);
         });
       }
     };
