@@ -146,7 +146,9 @@
       }
 
       students.push({
-        name: nameInputElement.value,
+        name: nameInputElement.value
+        .replaceAll("<", "&lt;") //защита от вставки
+        .replaceAll(">", "&gt;"),//скрипта вредоносного в поле имя
         year: yearsElement.value,
         color: colorInputElement.value
       });
