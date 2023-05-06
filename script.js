@@ -34,6 +34,14 @@ if (day <10){
 const year = dd.getFullYear() - 2000;
 let time = new Date().toLocaleTimeString().slice(0,-3);
 
+const commentTextInt = () =>{
+const commentText = document.querySelectorAll('.comment-body');
+for (let i=0; i<commentText.length; i++ ){
+  commentText[i].addEventListener('click', () =>{
+    alert('hi');
+  });
+}
+};
 const initLikesButton = () => {
   const likeButtonsElements = document.querySelectorAll('.like-button');
   // пройдемся по всем кнопкам и добавим слушателя клика
@@ -78,6 +86,7 @@ return     `<li class="comment">
   }).join('');
   listElement.innerHTML = commentsHtml;
   initLikesButton();
+  commentTextInt();
 };
 
 renderComments();
