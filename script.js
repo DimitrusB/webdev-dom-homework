@@ -37,11 +37,15 @@ let time = new Date().toLocaleTimeString().slice(0,-3);
 const commentTextInt = () =>{
 const commentText = document.querySelectorAll('.comment-body');
 for (let i=0; i<commentText.length; i++ ){
-  commentText[i].addEventListener('click', () =>{
-    alert('hi');
+ commentText[i].addEventListener('click', () =>{
+  const commetnTry =  comments[i].comment;
+  console.log(commetnTry);
+  // commentInputElement = `> ${commetnTry}`;
   });
 }
 };
+
+
 const initLikesButton = () => {
   const likeButtonsElements = document.querySelectorAll('.like-button');
   // пройдемся по всем кнопкам и добавим слушателя клика
