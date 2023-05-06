@@ -36,16 +36,19 @@ let time = new Date().toLocaleTimeString().slice(0,-3);
 
 const commentTextInt = () =>{
 const commentText = document.querySelectorAll('.comment-text');
+// console.log(commentText);
 for (let i=0; i<commentText.length; i++ ){
  commentText[i].addEventListener('click', () =>{
-    const commetnTry =  comments[i].comment;
-  // console.log(commetnTry);
-  // commentInputElement.textContent =`> ${commetnTry}`;
-  commentInputElement.innerHTML = `> ${commetnTry}`;
-  });
+      const commentTry = ` > ${comments[i].comment} \n ${comments[i].name} \n`;
+  // console.log(commentTry);
+  
+  // commentInputElement.textContent =`> ${commentTry}`;
+  commentInputElement.value= commentTry;
+  renderComments();
+});
 }
 };
-commentTextInt();
+
 
 const initLikesButton = () => {
   const likeButtonsElements = document.querySelectorAll('.like-button');
@@ -86,7 +89,6 @@ return     `<li class="comment">
     <button class="${comm.isLiked ? 'like-button -active-like' : 'like-button'}"></button>
   </div>
 </div>
-
 </li>`;
   }).join('');
   listElement.innerHTML = commentsHtml;
@@ -118,7 +120,7 @@ buttonElement.addEventListener ("keydown" && "click",  () => {
     isLiked: false,
 
   });
-  initLikesButton();
+
 renderComments();
 
 inputs.forEach(input => {
