@@ -72,9 +72,8 @@ const initEditButton = ()=>{
         const saveButtonElement = document.querySelectorAll('.save-button');
         for(let i=0; i < saveButtonElement.length; i++){
 
-          saveButtonElement[i].addEventListener('click', () => {
-          const newSaveTag=`<div class="comment-text">${comments[i].comment}</div>`;
-          comment.innerHTML = newSaveTag;
+          saveButtonElement.addEventListener('click', () => {
+          newSaveTag.value = comment;
           comments[i].isEdit = false;
         });
         }
