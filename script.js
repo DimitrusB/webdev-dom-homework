@@ -35,14 +35,14 @@ const year = dd.getFullYear() - 2000;
 let time = new Date().toLocaleTimeString().slice(0,-3);
 
 const commentTextInt = () =>{
-const commentText = document.querySelectorAll('.comment-body');
+const commentText = document.querySelectorAll('.comment-text');
 for (let i=0; i<commentText.length; i++ ){
  commentText[i].addEventListener('click', () =>{
   const commetnTry =  comments[i].comment;
-  console.log(commetnTry);
-  // commentInputElement = `> ${commetnTry}`;
+  // console.log(commetnTry);
+  commentInputElement.textContent =`> ${commetnTry}`;
   });
-}
+};
 };
 
 
@@ -102,15 +102,25 @@ buttonElement.addEventListener ("keydown" && "click",  () => {
   return;
   }
   comments.push({
-    name: nameInputElement.value,
+    name: nameInputElement.value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;"),
     date: `${day}.${mon}.${year} ${time}`,
-    comment: commentInputElement.value,
+    comment: commentInputElement.value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;"),
     likes: 0,
     isLiked: false,
      
   });
+  commentTextInt();
   initLikesButton();
 renderComments();
+
 inputs.forEach(input => {
   input.value = '';
 });
