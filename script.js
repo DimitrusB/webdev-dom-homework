@@ -38,11 +38,13 @@ const commentTextInt = () =>{
 const commentText = document.querySelectorAll('.comment-text');
 for (let i=0; i<commentText.length; i++ ){
  commentText[i].addEventListener('click', () =>{
-  const commetnTry =  comments[i].comment;
+    const commetnTry =  comments[i].comment;
   // console.log(commetnTry);
-  commentInputElement.textContent =`> ${commetnTry}`;
+  // commentInputElement.textContent =`> ${commetnTry}`;
+  commentInputElement.innerHTML = `> ${commetnTry}`;
+
   });
-};
+}
 };
 
 
@@ -75,7 +77,7 @@ return     `<li class="comment">
   <div>${comm.date}</div>
 </div>
 <div  class="comment-body">
-  <div class="comment-text">
+  <div class="comment-text" >
     ${comm.comment}    
   </div>
 </div>
@@ -115,9 +117,8 @@ buttonElement.addEventListener ("keydown" && "click",  () => {
     .replaceAll('"', "&quot;"),
     likes: 0,
     isLiked: false,
-     
+
   });
-  commentTextInt();
   initLikesButton();
 renderComments();
 
