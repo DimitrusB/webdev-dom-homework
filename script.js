@@ -42,11 +42,10 @@ for (let i=0; i<commentText.length; i++ ){
   // console.log(commetnTry);
   // commentInputElement.textContent =`> ${commetnTry}`;
   commentInputElement.innerHTML = `> ${commetnTry}`;
-
   });
 }
 };
-
+commentTextInt();
 
 const initLikesButton = () => {
   const likeButtonsElements = document.querySelectorAll('.like-button');
@@ -127,6 +126,6 @@ inputs.forEach(input => {
 });
   });
 
-  buttonDelElement.addEventListener ("click",  () => {
-    listElement.removeChild(listElement.lastElementChild);
-    });
+  // buttonDelElement.addEventListener ("click",  () => {
+  //   listElement.removeChild(listElement.lastElementChild);
+  //   });
