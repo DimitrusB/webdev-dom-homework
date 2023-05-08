@@ -35,18 +35,18 @@ const year = dd.getFullYear() - 2000;
 let time = new Date().toLocaleTimeString().slice(0,-3);
 
 const commentTextInt = () =>{
-const commentText = document.querySelectorAll('.comment-text');
+const commentText = document.querySelectorAll('.comment');
 // console.log(commentText);
-for (let i=0; i<commentText.length; i++ ){
- commentText[i].addEventListener('click', () =>{
-      const commentTry = ` > ${comments[i].comment} \n ${comments[i].name} \n`;
-  // console.log(commentTry);
-  
-  // commentInputElement.textContent =`> ${commentTry}`;
-  commentInputElement.value= commentTry;
-  renderComments();
-});
-}
+commentText.forEach((element,index) => 
+  element.addEventListener('click', () =>{
+    const commentTry = ` > ${comments[index].comment} \n ${comments[index].name} \n`;
+// console.log(commentTry);
+// commentInputElement.textContent =`> ${commentTry}`;
+commentInputElement.value= commentTry;
+renderComments();
+  })
+);
+
 };
 
 
@@ -54,7 +54,8 @@ const initLikesButton = () => {
   const likeButtonsElements = document.querySelectorAll('.like-button');
   // пройдемся по всем кнопкам и добавим слушателя клика
   for (let i = 0; i < likeButtonsElements.length; i++) {
-    likeButtonsElements[i].addEventListener('click', () => {
+    likeButtonsElements[i].addEventListener('click', (event) => {
+      event.stopPropagation();
       // console.log(comments[i]);
       // если комментарий не лайкнут, то отмечаем лайк (свойство isLiked) и увеличиваем счетчик
       if (comments[i].isLiked === false) {
