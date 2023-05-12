@@ -2,161 +2,118 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Урок "Динамические обработчики событий и всплытие"</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>Урок "Асинхронность"</title>
   </head>
 
   <body>
-    <h1>Любимые цвета студентов</h1>
-    <ul class="students" id="list">
+    <h1 id="main">Список задач</h1>
+    <ul class="tasks" id="list">
       <!-- Список рендерится из JS -->
     </ul>
-
+    <br />
     <div class="form">
       <h3 class="form-title">Форма добавления</h3>
       <div class="form-row">
-        Имя:&nbsp;&nbsp;
+        Что нужно сделать:
         <input
           type="text"
-          id="name-input"
+          id="text-input"
           class="input"
-          placeholder="Василий"
+          placeholder="Выпить кофе"
         />
       </div>
-      Год рождения:&nbsp;&nbsp;
-      <input
-      type="text"
-      id="year-input"
-      class="input"
-      placeholder="2010"
-    />
-  </div>
-      <div class="form-row">
-        Цвет:&nbsp;
-        <input type="color" id="color-input" class="color-input input" />
-        <br /><br />
-      </div>
+      <br />
       <button class="button" id="add-button">Добавить</button>
     </div>
   </body>
 
   <script>
+    //Получать из хранилища данных
     const buttonElement = document.getElementById("add-button");
     const listElement = document.getElementById("list");
-    const nameInputElement = document.getElementById("name-input");
-    const colorInputElement = document.getElementById("color-input");
-    const yearsElement = document.getElementById("year-input");
-    const studentElements = document.querySelectorAll(".student");
+    const textInputElement = document.getElementById("text-input");
+    const mainTitle = document.getElementById("main");
 
-    //     const elementsHtml = document.querySelector("html");
+    const result = fetch("https://webdev-hw-api.vercel.app/api/todos", {
+      method: "GET"
+    });
+    console.log(result);
 
-    // elementsHtml.addEventListener("click", () =>{
-    //   alert("HI");
-    // });
+    mainTitle.addEventListener("click", () => {
+      mainTitle.textContent = "3";
+      setTimeout(() => {
+        mainTitle.textContent = "2";
+        setTimeout(() => {
+          mainTitle.textContent = "1";
+          setTimeout(() => {
+            mainTitle.textContent = "Список задач";
+          }, 1000);
+        }, 1000);
+      }, 1000);
+    });
 
-    const students = [
+    let tasks = [
       {
-        name: "Глеб",
-        year: "1999",
-        color: "#ff2600"
+        text: "Купить чай"
       },
       {
-        name: "Иван",
-        year: "1993",
-        color: "#00f900"
+        text: "Заварить чай"
       },
       {
-        name: "Люси",
-        year: "1995",
-        color: "#0432ff"
+        text: "Выпить чай"
       }
     ];
 
-    // Добавляет обработчики кликов ко всем элементам с классом student
-    const initEventListeners = () => {
-      // Находит все элементы с классом student в разметке
-      const studentElements = document.querySelectorAll(".student");
-
-      // Цикл for проходит по каждому элементу в списке
-      for (const studentElement of studentElements) {
-        // Добавляет обработчик клика на конкретный элемент в списке
-        studentElement.addEventListener("click", () => {
-          console.log(studentElement.dataset.color);
-        });
-      }
-    };
-
-    const initDeleteButtonsListeners = () => {
-      const deleteButtonsElements = document.querySelectorAll(".delete-button");
-
-      for (const deleteButtonElement of deleteButtonsElements) {
-        deleteButtonElement.addEventListener("click", (even) => {
-          event.stopPropagation();//остановка распространенияя далее по DOM
-          // План удаления
-          // 1. (+) Мы храним список студентов в js массиве
-          // 2. (+) При клике мы удаляем нужный элемент из массива
-          // 3. (+) На основе нового массива в js формируем html разметку списка
-          const index = deleteButtonElement.dataset.index;
-          students.splice(index, 1);
-          renderStudents();
-        });
-      }
-      const elementsStudents = document.querySelectorAll(".student");
-
-      for (const student of elementsStudents) {
-        student.addEventListener("click", () => {
-          const color = student.dataset.color;
-          alert(`Любимый цвет студента: ${color}`);
-        });
-      }
-    };
-
-    const renderStudents = () => {
-      const studentsHtml = students
-        .map((student, index) => {
-          return `<li class="student" data-color="${student.color}">
-            <p class="student-name">
-              ${student.name}, год рождения ${student.year}, любимый цвет
-              <span style="color: ${student.color}"> ${student.color}</span>
-            </p>
-            <button data-index="${index}" class="delete-button">Удалить</button>
-          </li>`;
+    const renderTasks = () => {
+      const tasksHtml = tasks
+        .map((task, index) => {
+          return `
+              <li class="task">
+                <p class="task-text">
+                  ${task.text
+                    .replaceAll("&", "&amp;")
+                    .replaceAll("<", "&lt;")
+                    .replaceAll(">", "&gt;")
+                    .replaceAll('"', "&quot;")}
+                  <button data-index="${index}" class="button delete-button">Удалить</button>
+                </p>
+              </li>`;
         })
         .join("");
 
-      listElement.innerHTML = studentsHtml;
+      listElement.innerHTML = tasksHtml;
+      const deleteButtons = document.querySelectorAll(".delete-button");
 
-      initEventListeners();
-      initDeleteButtonsListeners();
+      for (const deleteButton of deleteButtons) {
+        deleteButton.addEventListener("click", (event) => {
+          event.stopPropagation();
+
+          deleteButton.innerHTML = "Задача удалаяется . . .";
+
+          setTimeout(() => {
+            const index = deleteButton.dataset.index;
+            //Удалять из хранилища данных
+            tasks.splice(index, 1);
+            renderTasks();
+          }, 1000);
+        });
+      }
     };
 
-    renderStudents();
+    renderTasks();
 
     buttonElement.addEventListener("click", () => {
-      nameInputElement.classList.remove("input-error");
-      yearsElement.classList.remove("input-error");
-
-      if (nameInputElement.value === "") {
-        nameInputElement.classList.add("input-error");
+      if (textInputElement.value === "") {
         return;
       }
-      if (yearsElement.value === "") {
-        yearsElement.classList.add("input-error");
-        return;
-      }
-
-      students.push({
-        name: nameInputElement.value
-        .replaceAll("<", "&lt;") //защита от вставки
-        .replaceAll(">", "&gt;"),//скрипта вредоносного в поле имя
-        year: yearsElement.value,
-        color: colorInputElement.value
+      //Добовлять из хранилища данных
+      tasks.push({
+        text: textInputElement.value
       });
 
-      renderStudents();
+      renderTasks();
 
-      nameInputElement.value = "";
-      yearsElement.value = "";
+      textInputElement.value = "";
     });
   </script>
 </html>
