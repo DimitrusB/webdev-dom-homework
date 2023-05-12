@@ -34,10 +34,33 @@
     const textInputElement = document.getElementById("text-input");
     const mainTitle = document.getElementById("main");
 
-    const result = fetch("https://webdev-hw-api.vercel.app/api/todos", {
+    const fetchPromise = fetch("https://webdev-hw-api.vercel.app/api/todos", {
       method: "GET"
     });
-    console.log(result);
+    console.log(fetchPromise);
+    
+    fetchPromise.then((response) => {
+      console.log(response);
+
+      const jsonPromise = response.json();
+      jsonPromise.then((responseData) =>{
+        console.log(responseData);
+
+        tasks = responseData.todos;
+        renderTasks();
+      });
+    });
+
+//     const fetchColor = fetch ("https://webdev-hw-api.vercel.app/api/tasks/random-red",{
+//       method: "GET",
+//     });
+
+//     fetchColor.then((responseColor) => {
+//     const jsonColor = responseColor.json();
+//     jsonColor.then((responseColor) => {
+//     document.body.style.backgroundColor = responseColor.color;  
+// });
+// });
 
     mainTitle.addEventListener("click", () => {
       mainTitle.textContent = "3";
