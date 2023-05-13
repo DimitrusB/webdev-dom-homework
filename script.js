@@ -5,6 +5,7 @@ const commentInputElement = document.getElementById("comment-input");
 const listElement = document.getElementById("list"); 
 const inputs = document.querySelectorAll('#name-input, #comment-input'); //для отчистки формы ввода после отправки данных
 
+const funcGetComment = () =>{
 const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
   method: "GET",
 });
@@ -12,11 +13,22 @@ const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/com
 commentFetch.then((response) =>{
   const jsonPromise = response.json();
   jsonPromise.then((responseDataComment) =>{
-    comments = responseDataComment.todos;
+    const remComments = responseDataComment.comments.map((comment) =>{
+      return{
+        name: comment.author.name,
+        date: comment.date,
+        comment: comment.text,
+        likes: comment.likes,
+        isLiked: false,
+      };
+    });
+    comments = remComments;
     renderComments();
   });
 });
+};
 
+funcGetComment();
 let comments = [
   // {
   //  date: "12.02.22 12:18",
@@ -117,24 +129,42 @@ buttonElement.addEventListener ("keydown" && "click",  () => {
   buttonElement.disable = "true";
   return;
   }
-  comments.push({
-    name: nameInputElement.value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;"),
-    date: `${day}.${mon}.${year} ${time}`,
-    comment: commentInputElement.value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;"),
-    likes: 0,
-    isLiked: false,
 
+const addComment = () =>{
+  fetch ("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
+  method: "POST",
+  body: JSON.stringify({
+    name: nameInputElement.value,
+    text: commentInputElement.value,
+  }),
+}).then((response) => {
+  response.json().then((responseData) => {
+    comments = responseData.comments;
+    funcGetComment();
+  })
   });
+};
+addComment();
+
+  // comments.push({
+  //   name: nameInputElement.value
+  //   .replaceAll("&", "&amp;")
+  //   .replaceAll("<", "&lt;")
+  //   .replaceAll(">", "&gt;")
+  //   .replaceAll('"', "&quot;"),
+  //   date: `${day}.${mon}.${year} ${time}`,
+  //   comment: commentInputElement.value
+  //   .replaceAll("&", "&amp;")
+  //   .replaceAll("<", "&lt;")
+  //   .replaceAll(">", "&gt;")
+  //   .replaceAll('"', "&quot;"),
+  //   likes: 0,
+  //   isLiked: false,
+
+  // });
 
 renderComments();
+
 
 inputs.forEach(input => {
   input.value = '';
