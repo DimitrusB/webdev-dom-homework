@@ -134,8 +134,16 @@ const addComment = () =>{
   fetch ("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
   method: "POST",
   body: JSON.stringify({
-    name: nameInputElement.value,
-    text: commentInputElement.value,
+    name: nameInputElement.value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;"),
+    text: commentInputElement.value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;"),
   }),
 }).then((response) => {
   response.json().then((responseData) => {
@@ -152,7 +160,7 @@ addComment();
   //   .replaceAll("<", "&lt;")
   //   .replaceAll(">", "&gt;")
   //   .replaceAll('"', "&quot;"),
-  //   date: `${day}.${mon}.${year} ${time}`,
+    // date: `${day}.${mon}.${year} ${time}`,
   //   comment: commentInputElement.value
   //   .replaceAll("&", "&amp;")
   //   .replaceAll("<", "&lt;")
