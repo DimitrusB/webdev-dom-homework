@@ -16,7 +16,7 @@ commentFetch.then((response) =>{
     const remComments = responseDataComment.comments.map((comment) =>{
       return{
         name: comment.author.name,
-        date: comment.date,
+        date: comment.date.replace(/^(\d+)-(\d+)-(\d+)T(\d+):(\d+):(\d+).(\d+)Z/, `$3.$2.$1 $4:$5:$6`),
         comment: comment.text,
         likes: comment.likes,
         isLiked: false,
@@ -29,6 +29,8 @@ commentFetch.then((response) =>{
 };
 
 funcGetComment();
+
+
 let comments = [
   // {
   //  date: "12.02.22 12:18",
