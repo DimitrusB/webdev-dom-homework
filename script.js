@@ -170,7 +170,12 @@ inputs.forEach(input => {
   input.value = '';
 });
   });
+  
+///////////////////////////////
+  const delLastComment = () =>{
+    comments.pop();
+    renderComments();
+  };
 
-  // buttonDelElement.addEventListener ("click",  () => {
-  //   listElement.removeChild(listElement.lastElementChild);
-  //   });
+  buttonDelElement.addEventListener ("click", delLastComment); 
+
