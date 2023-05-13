@@ -5,21 +5,33 @@ const commentInputElement = document.getElementById("comment-input");
 const listElement = document.getElementById("list"); 
 const inputs = document.querySelectorAll('#name-input, #comment-input'); //для отчистки формы ввода после отправки данных
 
-const comments = [
-  {
-   date: "12.02.22 12:18",
-   name: "Глеб Фокин",
-   comment: "Это будет первый комментарий на этой странице",
-   likes: 3,
-   isLiked: false,
-  },
-  {
-    date: "13.02.22 19:22",
-    name: "Варвара Н.",
-    comment: "Мне нравится как оформлена эта страница! ❤",
-    likes: 75,
-    isLiked: true,
-  }
+const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
+  method: "GET",
+});
+
+commentFetch.then((response) =>{
+  const jsonPromise = response.json();
+  jsonPromise.then((responseDataComment) =>{
+    comments = responseDataComment.todos;
+    renderComments();
+  });
+});
+
+let comments = [
+  // {
+  //  date: "12.02.22 12:18",
+  //  name: "Глеб Фокин",
+  //  comment: "Это будет первый комментарий на этой странице",
+  //  likes: 3,
+  //  isLiked: false,
+  // },
+  // {
+  //   date: "13.02.22 19:22",
+  //   name: "Варвара Н.",
+  //   comment: "Мне нравится как оформлена эта страница! ❤",
+  //   likes: 75,
+  //   isLiked: true,
+  // }
 ];
 
 const dd = new Date();
