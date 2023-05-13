@@ -170,8 +170,7 @@ inputs.forEach(input => {
   input.value = '';
 });
   });
-  
-///////////////////////////////
+//===========================//
   const delLastComment = () =>{
     comments.pop();
     renderComments();
