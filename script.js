@@ -48,17 +48,17 @@ let comments = [
   // }
 ];
 
-const dd = new Date();
-let day = dd.getDate();
-let mon = dd.getMonth()+1;
-if (mon<10){
-  mon = '0'+mon;
-}
-if (day <10){
-  day = '0' + day;
-}
-const year = dd.getFullYear() - 2000;
-let time = new Date().toLocaleTimeString().slice(0,-3);
+// const dd = new Date();
+// let day = dd.getDate();
+// let mon = dd.getMonth()+1;
+// if (mon<10){
+//   mon = '0'+mon;
+// }
+// if (day <10){
+//   day = '0' + day;
+// }
+// const year = dd.getFullYear() - 2000;
+// let time = new Date().toLocaleTimeString().slice(0,-3);
 
 const commentTextInt = () =>{
 const commentText = document.querySelectorAll('.comment');
@@ -149,7 +149,7 @@ const addComment = () =>{
   }),
 }).then((response) => {
   response.json().then((responseData) => {
-    comments = responseData.comments;
+    // comments = responseData.comments;
     funcGetComment();
   })
   });
