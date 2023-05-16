@@ -106,7 +106,8 @@
 
       const startAt = Date.now();
       console.log("Начинаем делать запрос");
-
+        buttonElement.disabled = true;
+        buttonElement.textContent = "Элемент добавляется...";
       // Пример кода выше, переписанный на цепочку промисов:
       fetch("https://webdev-hw-api.vercel.app/api/todos", {
         method: "POST",
@@ -147,7 +148,8 @@
           return "Глеб";
         })
         .then((data) => {
-          console.log(data);
+          buttonElement.disabled = false;
+          buttonElement.textContent = "Добавить";
         });
 
       renderTasks();
