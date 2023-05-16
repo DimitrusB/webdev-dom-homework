@@ -46,13 +46,13 @@
     const renderTasks = () => {
       const tasksHtml = tasks
         .map((task) => {
-          return '
+          return `
           <li class="task">
             <p class="task-text">
               ${task.text}
               <button data-id="${task.id}" class="button delete-button">Удалить</button>
             </p>
-          </li>';
+          </li>`;
         })
         .join("");
 
@@ -61,6 +61,7 @@
 
       for (const deleteButton of deleteButtons) {
         deleteButton.addEventListener("click", (event) => {
+		      // TODO: Опишите в комментарии, что делает код на следующей строчке
           event.stopPropagation();
 
           const id = deleteButton.dataset.id;
@@ -69,13 +70,10 @@
             method: "DELETE",
           }).then((response) => {
             response.json().then((responseData) => {
-              // { result: 'ok' }
-              // tasks = responseData.todos;
+              tasks = responseData.todos;
               renderTasks();
             });
           });
-
-          renderTasks();
         });
       }
     };
@@ -117,14 +115,14 @@
         }),
       })
         .then((response) => {
-          console.log("Время: " + (Date.now() - startAt));
+          console.log("Время: " + ((Date.now() - startAt)/1000) + " сек");
           return response;
         })
         .then((response) => {
           return response.json();
         })
         .then((response) => {
-          console.log("Время: " + (Date.now() - startAt));
+          console.log("Время: " + ((Date.now() - startAt)/1000) + " сек");
           return response;
         })
         .then((responseData) => {
@@ -133,14 +131,14 @@
           });
         })
         .then((response) => {
-          console.log("Время: " + (Date.now() - startAt));
-          return response;
+          console.log("Время: " + ((Date.now() - startAt)/1000) + " сек");
+                    return response;
         })
         .then((response) => {
           return response.json();
         })
         .then((response) => {
-          console.log("Время: " + (Date.now() - startAt));
+          console.log("Время: " + ((Date.now() - startAt)/1000) + " сек");
           return response;
         })
         .then((responseData) => {
