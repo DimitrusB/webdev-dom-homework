@@ -49,6 +49,13 @@ renderComments();
 
 };
 
+function delay(interval = 300) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, interval);
+  });
+};
 
 const initLikesButton = () => {
   const likeButtonsElements = document.querySelectorAll('.like-button');
@@ -57,6 +64,8 @@ const initLikesButton = () => {
     likeButtonsElements[i].addEventListener('click', (event) => {
       event.stopPropagation();
       // если комментарий не лайкнут, то отмечаем лайк (свойство isLiked) и увеличиваем счетчик
+      delay(2000)
+      .then(() => {
       if (comments[i].isLiked === false) {
         comments[i].isLiked = true;
         comments[i].likes += 1;
@@ -66,6 +75,7 @@ const initLikesButton = () => {
       }
       renderComments();
     });
+  });
   }
 };
 
