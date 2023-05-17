@@ -12,12 +12,10 @@ const funcGetComment = () =>{
 loaderText.textContent = 'Пожалуйста подождите комментарии загружаются . . . ';
 const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
   method: "GET",
-});
-
-
-commentFetch.then((response) =>{
-    const jsonPromise = response.json();
-  jsonPromise.then((responseDataComment) =>{
+})
+.then((response) =>{
+    return response.json()})
+  .then((responseDataComment) =>{
     const remComments = responseDataComment.comments.map((comment) =>{
       return{
         name: comment.author.name,
@@ -31,7 +29,6 @@ commentFetch.then((response) =>{
     renderComments();
     loaderText.textContent = '';
   });
-});
 };
 
 funcGetComment();
