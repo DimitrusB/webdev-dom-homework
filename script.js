@@ -4,14 +4,19 @@ const nameInputElement = document.getElementById("name-input");
 const commentInputElement = document.getElementById("comment-input");
 const listElement = document.getElementById("list"); 
 const inputs = document.querySelectorAll('#name-input, #comment-input'); //для отчистки формы ввода после отправки данных
+const loaderText= document.getElementById("loaderSet");
+const loaderTextDown= document.getElementById("loaderSetDown");
+const addCommentForm = document.getElementById("addForm");
 
 const funcGetComment = () =>{
+loaderText.textContent = 'Пожалуйста подождите комментарии загружаются . . . ';
 const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
   method: "GET",
 });
 
+
 commentFetch.then((response) =>{
-  const jsonPromise = response.json();
+    const jsonPromise = response.json();
   jsonPromise.then((responseDataComment) =>{
     const remComments = responseDataComment.comments.map((comment) =>{
       return{
@@ -24,6 +29,7 @@ commentFetch.then((response) =>{
     });
     comments = remComments;
     renderComments();
+    loaderText.textContent = '';
   });
 });
 };
@@ -31,43 +37,14 @@ commentFetch.then((response) =>{
 funcGetComment();
 
 
-let comments = [
-  // {
-  //  date: "12.02.22 12:18",
-  //  name: "Глеб Фокин",
-  //  comment: "Это будет первый комментарий на этой странице",
-  //  likes: 3,
-  //  isLiked: false,
-  // },
-  // {
-  //   date: "13.02.22 19:22",
-  //   name: "Варвара Н.",
-  //   comment: "Мне нравится как оформлена эта страница! ❤",
-  //   likes: 75,
-  //   isLiked: true,
-  // }
-];
+let comments = [];
 
-// const dd = new Date();
-// let day = dd.getDate();
-// let mon = dd.getMonth()+1;
-// if (mon<10){
-//   mon = '0'+mon;
-// }
-// if (day <10){
-//   day = '0' + day;
-// }
-// const year = dd.getFullYear() - 2000;
-// let time = new Date().toLocaleTimeString().slice(0,-3);
 
 const commentTextInt = () =>{
 const commentText = document.querySelectorAll('.comment');
-// console.log(commentText);
 commentText.forEach((element,index) => 
   element.addEventListener('click', () =>{
     const commentTry = ` > ${comments[index].comment} \n ${comments[index].name} \n`;
-// console.log(commentTry);
-// commentInputElement.textContent =`> ${commentTry}`;
 commentInputElement.value= commentTry;
 renderComments();
   })
@@ -82,7 +59,6 @@ const initLikesButton = () => {
   for (let i = 0; i < likeButtonsElements.length; i++) {
     likeButtonsElements[i].addEventListener('click', (event) => {
       event.stopPropagation();
-      // console.log(comments[i]);
       // если комментарий не лайкнут, то отмечаем лайк (свойство isLiked) и увеличиваем счетчик
       if (comments[i].isLiked === false) {
         comments[i].isLiked = true;
@@ -131,8 +107,10 @@ buttonElement.addEventListener ("keydown" && "click",  () => {
   buttonElement.disable = "true";
   return;
   }
-
+  
 const addComment = () =>{
+  addCommentForm.classList.add('hidden');
+  loaderTextDown.textContent = 'Пожалуйста подождите комментарий загружается . . . ';
   fetch ("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
   method: "POST",
   body: JSON.stringify({
@@ -149,30 +127,35 @@ const addComment = () =>{
   }),
 }).then((response) => {
   response.json().then((responseData) => {
-    // comments = responseData.comments;
-    funcGetComment();
+    ////////////////////////////
+    const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
+  method: "GET",
+});
+commentFetch.then((response) =>{
+    const jsonPromise = response.json();
+  jsonPromise.then((responseDataComment) =>{
+    const remComments = responseDataComment.comments.map((comment) =>{
+      return{
+        name: comment.author.name,
+        date: comment.date.replace(/^(\d+)-(\d+)-(\d+)T(\d+):(\d+):(\d+).(\d+)Z/, `$3.$2.$1 $4:$5:$6`),
+        comment: comment.text,
+        likes: comment.likes,
+        isLiked: false,
+      };
+    });
+    comments = remComments;
+    renderComments();
+  });
+});
+//////////////////////
+    loaderTextDown.textContent = '';
+    addCommentForm.classList.remove('hidden');
+    addCommentForm.classList.add('add-form');
   })
+
   });
 };
 addComment();
-
-  // comments.push({
-  //   name: nameInputElement.value
-  //   .replaceAll("&", "&amp;")
-  //   .replaceAll("<", "&lt;")
-  //   .replaceAll(">", "&gt;")
-  //   .replaceAll('"', "&quot;"),
-    // date: `${day}.${mon}.${year} ${time}`,
-  //   comment: commentInputElement.value
-  //   .replaceAll("&", "&amp;")
-  //   .replaceAll("<", "&lt;")
-  //   .replaceAll(">", "&gt;")
-  //   .replaceAll('"', "&quot;"),
-  //   likes: 0,
-  //   isLiked: false,
-
-  // });
-
 renderComments();
 
 
