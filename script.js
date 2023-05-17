@@ -122,15 +122,19 @@ const addComment = () =>{
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;"),
   }),
-}).then((response) => {
-  response.json().then((responseData) => {
+})
+.then((response) => {
+  return response.json()
+})
+  .then((responseData) => {
     ////////////////////////////
     const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
   method: "GET",
-});
-commentFetch.then((response) =>{
-    const jsonPromise = response.json();
-  jsonPromise.then((responseDataComment) =>{
+})
+.then((response) =>{
+    return response.json()
+})
+  .then((responseDataComment) =>{
     const remComments = responseDataComment.comments.map((comment) =>{
       return{
         name: comment.author.name,
@@ -143,23 +147,22 @@ commentFetch.then((response) =>{
     comments = remComments;
     renderComments();
   });
-});
+
 //////////////////////
     loaderTextDown.textContent = '';
     addCommentForm.classList.remove('hidden');
     addCommentForm.classList.add('add-form');
-  })
-
+  
   });
 };
+
 addComment();
 renderComments();
-
 
 inputs.forEach(input => {
   input.value = '';
 });
-  });
+});
 //===========================//
   const delLastComment = () =>{
     comments.pop();
