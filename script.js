@@ -8,8 +8,8 @@ const loaderText= document.getElementById("loaderSet");
 const loaderTextDown= document.getElementById("loaderSetDown");
 const addCommentForm = document.getElementById("addForm");
 
-const funcGetComment = () =>{
-loaderText.textContent = 'Пожалуйста подождите комментарии загружаются . . . ';
+const funcGetComment = (a,b) =>{
+loaderText.textContent = a;
 const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
   method: "GET",
 })
@@ -27,11 +27,11 @@ const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/com
     });
     comments = remComments;
     renderComments();
-    loaderText.textContent = '';
+    loaderText.textContent = b;
   });
 };
 
-funcGetComment();
+funcGetComment('Пожалуйста подождите комментарии загружаются . . . ', '');
 
 
 let comments = [];
@@ -128,25 +128,7 @@ const addComment = () =>{
 })
   .then((responseData) => {
     ////////////////////////////
-    const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
-  method: "GET",
-})
-.then((response) =>{
-    return response.json()
-})
-  .then((responseDataComment) =>{
-    const remComments = responseDataComment.comments.map((comment) =>{
-      return{
-        name: comment.author.name,
-        date: comment.date.replace(/^(\d+)-(\d+)-(\d+)T(\d+):(\d+):(\d+).(\d+)Z/, `$3.$2.$1 $4:$5:$6`),
-        comment: comment.text,
-        likes: comment.likes,
-        isLiked: false,
-      };
-    });
-    comments = remComments;
-    renderComments();
-  });
+    funcGetComment();
 
 //////////////////////
     loaderTextDown.textContent = '';
