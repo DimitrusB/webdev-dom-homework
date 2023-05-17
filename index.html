@@ -33,15 +33,23 @@
     const textInputElement = document.getElementById("text-input");
 
     let tasks = [];
-
-    fetch("https://webdev-hw-api.vercel.app/api/todos", {
+const fetchAndRenderTasks = () => {
+  buttonElement.textContent = "LOADING..."
+    return fetch("https://webdev-hw-api.vercel.app/api/todos", {
       method: "GET",
-    }).then((response) => {
-      response.json().then((responseData) => {
+    })
+    .then((response) => {
+      return response.json()
+    })
+      .then((responseData) => {
         tasks = responseData.todos;
         renderTasks();
-      });
+      })
+      .then(() =>{
+      buttonElement.textContent = "Добавить"
     });
+    };
+
 
     const renderTasks = () => {
       const tasksHtml = tasks
@@ -77,7 +85,7 @@
         });
       }
     };
-
+    fetchAndRenderTasks();
     renderTasks();
 
     buttonElement.addEventListener("click", () => {
@@ -126,27 +134,30 @@
           console.log("Время: " + ((Date.now() - startAt)/1000) + " сек");
           return response;
         })
-        .then((responseData) => {
-          return fetch("https://webdev-hw-api.vercel.app/api/todos", {
-            method: "GET",
-          });
+        .then(() =>{
+          return fetchAndRenderTasks(); //ЭТО ВМЕСТО КОДА НИЖЕ!!!
         })
-        .then((response) => {
-          console.log("Время: " + ((Date.now() - startAt)/1000) + " сек");
-                    return response;
-        })
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          console.log("Время: " + ((Date.now() - startAt)/1000) + " сек");
-          return response;
-        })
-        .then((responseData) => {
-          tasks = responseData.todos;
-          renderTasks();
-          return "Глеб";
-        })
+        // .then((responseData) => {
+        //   return fetch("https://webdev-hw-api.vercel.app/api/todos", {
+        //     method: "GET",
+        //   });
+        // })
+        // .then((response) => {
+        //   console.log("Время: " + ((Date.now() - startAt)/1000) + " сек");
+        //             return response;
+        // })
+        // .then((response) => {
+        //   return response.json();
+        // })
+        // .then((response) => {
+        //   console.log("Время: " + ((Date.now() - startAt)/1000) + " сек");
+        //   return response;
+        // })
+        // .then((responseData) => {
+        //   tasks = responseData.todos;
+        //   renderTasks();
+        //   return "Глеб";
+        // })
         .then((data) => {
           buttonElement.disabled = false;
           buttonElement.textContent = "Добавить";
