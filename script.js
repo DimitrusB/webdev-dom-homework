@@ -64,7 +64,7 @@ const initLikesButton = () => {
     likeButtonsElements[i].addEventListener('click', (event) => {
       event.stopPropagation();
       // если комментарий не лайкнут, то отмечаем лайк (свойство isLiked) и увеличиваем счетчик
-      delay(2000)
+      delay(200)
       .then(() => {
       if (comments[i].isLiked === false) {
         comments[i].isLiked = true;
