@@ -139,7 +139,7 @@ const addComment = () =>{
     return response.json()
   }
   else if (response.status === 500){
-    
+    throw new Error ('интерент пропал')
   }else
   return Promise.reject("Ошибка");
   
@@ -159,7 +159,7 @@ const addComment = () =>{
   })
   .catch((error) =>{
     alert('Пропал интернет');
-  })
+  });
 
 
 };
