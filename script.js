@@ -155,13 +155,7 @@ const addComment = () =>{
     loaderTextDown.textContent = '';
     addCommentForm.classList.remove('hidden');
     addCommentForm.classList.add('add-form');
-  
   })
-  .catch((error) =>{
-    alert('Пропал интернет');
-  });
-
-
 };
 
 addComment();
