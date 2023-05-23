@@ -98,23 +98,34 @@ const fetchAndRenderTasks = () => {
         buttonElement.disabled = true;
         buttonElement.textContent = "Элемент добавляется...";
       // Пример кода выше, переписанный на цепочку промисов:
-      fetch("https://webdev-hw-api.vercel.app/api/todos", {
+      // fetch("https://webdev-hw-api.vercel.app/api/todos", {
+      //с ошибкой
+      fetch("https://webdev-hw-api.vercel.app/api/todos/with-error", {
         method: "POST",
         body: JSON.stringify({
           text: textInputElement.value,
         }),
       })
-        .then((response) => {
-          console.log("Время: " + ((Date.now() - startAt)/1000) + " сек");
-          return response;
-        })
-        .then((response) => {
+      .then((response) =>{
+        console.log(response);
+        if (response.status == 201) {
           return response.json();
-        })
-        .then((response) => {
-          console.log("Время: " + ((Date.now() - startAt)/1000) + " сек");
-          return response;
-        })
+        }
+        else 
+            //   throw new Error("Сервер упал"); метод №1 и второй ниже
+             return Promise.reject("Сервер упал");
+      })
+      //   .then((response) => {
+      //     console.log("Время: " + ((Date.now() - startAt)/1000) + " сек");
+      //     return response;
+      //   })
+      //   .then((response) => {
+      //     return response.json();
+      //   })
+      //   .then((response) => {
+      //     console.log("Время: " + ((Date.now() - startAt)/1000) + " сек");
+      //     return response;
+      //   })
         .then(() =>{
           return fetchAndRenderTasks(); //ЭТО ВМЕСТО КОДА НИЖЕ!!!
         })
