@@ -14,7 +14,17 @@ const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/com
   method: "GET",
 })
 .then((response) =>{
-    return response.json()})
+  if (response.status === 500){
+    throw new Error("error internet");
+  }else
+    return response.json()
+  })
+  .catch((error) =>{
+if (error.message === "error internet"){
+    alert("Отсутствует подключение к интернет");
+  return;
+}
+})
   .then((responseDataComment) =>{
     const remComments = responseDataComment.comments.map((comment) =>{
       return{
@@ -112,21 +122,26 @@ buttonElement.addEventListener ("keydown" && "click",  () => {
 
   if (nameInputElement.value === "" || commentInputElement.value === ""){
   buttonElement.disable = "true";
+  alert("Длина имени или комментария должна быть не менее 3-х знаков");
   return;
   }
   
-const addComment = () =>{
+const addComment = (a,b) =>{
+  a = nameInputElement.value;
+console.log(a);
+  b =commentInputElement.value;
+console.log(b);
   addCommentForm.classList.add('hidden');
   loaderTextDown.textContent = 'Пожалуйста подождите комментарий загружается . . . ';
   fetch ("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
   method: "POST",
   body: JSON.stringify({
-    name: nameInputElement.value
+    name: a
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;"),
-    text: commentInputElement.value
+    text: b
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
@@ -136,16 +151,26 @@ const addComment = () =>{
 })
 .then((response) => {
   if (response.status === 201 || response.status === 200 ){
-    return response.json()
+    return response.json();
   }
-  else if (response.status === 400){
-    throw new Error ('Ошибка')
-  }else
-  return Promise.reject("Ошибка");
+  if (response.status === 400){
+    throw new Error("slow words");
+  }
+  if (response.status === 500){
+    throw new Error("error internet");
+  }
+  
   
 })
-.catch((error) =>{
-  alert("Слишком короткое имя или комментарий. Должно быть не менее 3-х символов");
+  .catch((error) =>{
+    if (error.message === "slow words"){
+  alert("Длина имени или комментария должна быть не менее 3-х знаков");
+return ;
+}
+if (error.message === "error internet"){
+    alert("Отсутствует подключение к интернет");
+  return;
+}
 })
   .then((responseData) => {
     ////////////////////////////
@@ -161,6 +186,7 @@ const addComment = () =>{
 addComment();
 renderComments();
 
+
 inputs.forEach(input => {
   input.value = '';
 });
@@ -172,4 +198,3 @@ inputs.forEach(input => {
   };
 
   buttonDelElement.addEventListener ("click", delLastComment); 
-
