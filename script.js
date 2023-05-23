@@ -137,8 +137,15 @@ const addComment = () =>{
 .then((response) => {
   if (response.status === 201 || response.status === 200 ){
     return response.json()
+  }
+  else if (response.status === 500){
+    
   }else
-  throw new Error("Ошибка");
+  return Promise.reject("Ошибка");
+  
+})
+.catch((error) =>{
+  alert("Что то пошло не так");
 })
   .then((responseData) => {
     ////////////////////////////
@@ -151,8 +158,9 @@ const addComment = () =>{
   
   })
   .catch((error) =>{
-    alert("Что то пошло не так");
-  });
+    alert('Пропал интернет');
+  })
+
 
 };
 
