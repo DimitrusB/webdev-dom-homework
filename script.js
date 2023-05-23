@@ -137,9 +137,8 @@ const addComment = () =>{
 .then((response) => {
   if (response.status === 201 || response.status === 200 ){
     return response.json()
-  }
+  }else
   throw new Error("Ошибка");
-
 })
   .then((responseData) => {
     ////////////////////////////
@@ -154,6 +153,7 @@ const addComment = () =>{
   .catch((error) =>{
     alert("Что то пошло не так");
   });
+
 };
 
 addComment();
