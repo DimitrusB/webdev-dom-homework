@@ -138,7 +138,7 @@ const addComment = () =>{
   if (response.status === 201 || response.status === 200 ){
     return response.json()
   }
-
+  throw new Error("Ошибка");
 
 })
   .then((responseData) => {
@@ -150,6 +150,9 @@ const addComment = () =>{
     addCommentForm.classList.remove('hidden');
     addCommentForm.classList.add('add-form');
   
+  })
+  .catch((error) =>{
+    alert("Что то пошло не так");
   });
 };
 
