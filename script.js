@@ -138,14 +138,14 @@ const addComment = () =>{
   if (response.status === 201 || response.status === 200 ){
     return response.json()
   }
-  else if (response.status === 500){
-    throw new Error ('интерент пропал')
+  else if (response.status === 400){
+    throw new Error ('Ошибка')
   }else
   return Promise.reject("Ошибка");
   
 })
 .catch((error) =>{
-  alert("Что то пошло не так");
+  alert("Слишком короткое имя или комментарий. Должно быть не менее 3-х символов");
 })
   .then((responseData) => {
     ////////////////////////////
