@@ -131,10 +131,15 @@ const addComment = () =>{
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;"),
+    forceError: true,
   }),
 })
 .then((response) => {
-  return response.json()
+  if (response.status === 201 || response.status === 200 ){
+    return response.json()
+  }
+
+
 })
   .then((responseData) => {
     ////////////////////////////
