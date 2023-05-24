@@ -118,6 +118,7 @@ return     `<li class="comment">
 
 renderComments();
 
+
 buttonElement.addEventListener ("keydown" && "click",  () => {
 
   if (nameInputElement.value === "" || commentInputElement.value === ""){
@@ -126,22 +127,18 @@ buttonElement.addEventListener ("keydown" && "click",  () => {
   return;
   }
   
-const addComment = (a,b) =>{
-  a = nameInputElement.value;
-console.log(a);
-  b =commentInputElement.value;
-console.log(b);
+const addComment = () =>{
   addCommentForm.classList.add('hidden');
   loaderTextDown.textContent = 'Пожалуйста подождите комментарий загружается . . . ';
   fetch ("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
   method: "POST",
   body: JSON.stringify({
-    name: a
+    name: nameInputElement.value
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;"),
-    text: b
+    text: commentInputElement.value
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
@@ -151,16 +148,18 @@ console.log(b);
 })
 .then((response) => {
   if (response.status === 201 || response.status === 200 ){
+    inputs.forEach(input => {
+      input.value = '';
+    });
     return response.json();
   }
   if (response.status === 400){
     throw new Error("slow words");
-  }
-  if (response.status === 500){
+  } 
+   if (response.status === 500){
     throw new Error("error internet");
   }
-  
-  
+   
 })
   .catch((error) =>{
     if (error.message === "slow words"){
@@ -182,15 +181,11 @@ if (error.message === "error internet"){
     addCommentForm.classList.add('add-form');
   })
 };
-
 addComment();
 renderComments();
 
+});
 
-inputs.forEach(input => {
-  input.value = '';
-});
-});
 //===========================//
   const delLastComment = () =>{
     comments.pop();
