@@ -118,7 +118,6 @@ return     `<li class="comment">
 
 renderComments();
 
-
 buttonElement.addEventListener ("keydown" && "click",  () => {
 
   if (nameInputElement.value === "" || commentInputElement.value === ""){
