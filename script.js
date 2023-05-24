@@ -156,7 +156,8 @@ const addComment = () =>{
     throw new Error("slow words");
   } 
    if (response.status === 500){
-    throw new Error("error internet");
+    console.log("error internet");
+    addComment();
   }
    
 })
@@ -165,10 +166,10 @@ const addComment = () =>{
   alert("Длина имени или комментария должна быть не менее 3-х знаков");
 return ;
 }
-if (error.message === "error internet"){
-    alert("Отсутствует подключение к интернет");
-  return;
-}
+// if (error.message === "error internet"){
+//     alert("Отсутствует подключение к интернет");
+//   return;
+// }
 })
   .then((responseData) => {
     ////////////////////////////
