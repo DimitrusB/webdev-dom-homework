@@ -11,6 +11,10 @@ const students = [
     name: "Глеб",
     color: "#ff2600",
   },
+  {
+    name: "Глеб",
+    color: "#ff2600",
+  },
 ];
 
 // Рендер-функция
