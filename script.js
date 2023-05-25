@@ -14,16 +14,10 @@ const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/com
   method: "GET",
 })
 .then((response) =>{
-  if (response.status === 500){
-    throw new Error("error internet");
-  }else
     return response.json()
   })
   .catch((error) =>{
-if (error.message === "error internet"){
-    alert("Отсутствует подключение к интернет");
-  return;
-}
+      alert ("Проблемы с подключением, попробуйте позже");
 })
   .then((responseDataComment) =>{
     const remComments = responseDataComment.comments.map((comment) =>{
@@ -156,20 +150,19 @@ const addComment = () =>{
     throw new Error("slow words");
   } 
    if (response.status === 500){
-    console.log("error internet");
-    addComment();
+    throw new Error("error server");
   }
-   
 })
   .catch((error) =>{
     if (error.message === "slow words"){
   alert("Длина имени или комментария должна быть не менее 3-х знаков");
+  console.warn(error + ": имя и комментарий должен быть больше 3-х символов");
 return ;
 }
-// if (error.message === "error internet"){
-//     alert("Отсутствует подключение к интернет");
-//   return;
-// }
+if (error.message === "error server"){
+   console.log("Сервер упал попробуйте позже");
+  addComment();
+}
 })
   .then((responseData) => {
     ////////////////////////////
