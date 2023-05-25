@@ -18,6 +18,7 @@ const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/com
   })
   .catch((error) =>{
       alert ("Проблемы с подключением, попробуйте позже");
+      console.warn(error + ": отсутствует подключение к интернет");
 })
   .then((responseDataComment) =>{
     const remComments = responseDataComment.comments.map((comment) =>{
