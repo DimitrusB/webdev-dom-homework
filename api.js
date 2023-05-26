@@ -1,9 +1,18 @@
+const loaderText= document.getElementById("loaderSet");
+const addCommentForm = document.getElementById("addForm");
+const loaderTextDown= document.getElementById("loaderSetDown");
+const inputs = document.querySelectorAll('#name-input, #comment-input'); //для отчистки формы ввода после отправки данных
+
+import { commentInputElement, nameInputElement } from "./script.js";
+import { renderComments } from "./rendercomments.js";
+export let comments = [];
+
 export const funcGetComment = (a,b) =>{
     loaderText.textContent = a;
     const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
       method: "GET",
     })
-    .then((response) =>{1
+    .then((response) =>{
         return response.json()
       })
       .catch((error) =>{
@@ -25,7 +34,8 @@ export const funcGetComment = (a,b) =>{
         loaderText.textContent = b;
       });
     };
-// =========================================================//
+
+
     export const addComment = () =>{
         addCommentForm.classList.add('hidden');
         loaderTextDown.textContent = 'Пожалуйста подождите комментарий загружается . . . ';
