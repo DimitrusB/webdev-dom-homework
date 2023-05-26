@@ -64,12 +64,10 @@ buttonElement.addEventListener ("keydown" && "click",  () => {
   alert("Длина имени или комментария должна быть не менее 3-х знаков");
   return;
   }
-
-addComment();
-renderComments();
+  addComment();
+  renderComments();
 
 });
-
 //===========================//
   const delLastComment = () =>{
     comments.pop();
