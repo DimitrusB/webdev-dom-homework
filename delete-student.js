@@ -1,11 +1,6 @@
+import { students } from "./data.js";
 const listElement = document.getElementById("list");
 
-const students = [
-  {
-    name: "Глеб",
-    color: "#ff2600",
-  },
-];
 
 const renderStudents = () => {
   const studentsHtml = students
@@ -20,6 +15,7 @@ const renderStudents = () => {
           width: 15px;
           height: 15px;
           background-color: ${student.color};">
+          <button data-index="${index}" class="button delete-button">Удалить</button>
         </span></p>
       </li>`;
     })
