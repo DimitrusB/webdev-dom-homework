@@ -9,10 +9,16 @@ export let comments = [];
 
 export const funcGetComment = (a,b) =>{
     loaderText.textContent = a;
-    const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
+    const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v2/:Dmitriy/comments", {
       method: "GET",
+      headers: {
+      Authorization:"Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k",
+      },
     })
     .then((response) =>{
+      if (response.status === 401) {
+        throw new Error("Нет авторизации");
+      }
         return response.json()
       })
       .catch((error) =>{
@@ -39,7 +45,7 @@ export const funcGetComment = (a,b) =>{
     export const addComment = () =>{
         addCommentForm.classList.add('hidden');
         loaderTextDown.textContent = 'Пожалуйста подождите комментарий загружается . . . ';
-        fetch ("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
+        fetch ("https://webdev-hw-api.vercel.app/api/v2/:Dmitriy/comments", {
         method: "POST",
         body: JSON.stringify({
           name: nameInputElement.value
@@ -54,6 +60,9 @@ export const funcGetComment = (a,b) =>{
           .replaceAll('"', "&quot;"),
           forceError: true,
         }),
+        headers: {
+          Authorization:"Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k",
+          },
       })
       .then((response) => {
         if (response.status === 201 || response.status === 200 ){
@@ -90,3 +99,17 @@ export const funcGetComment = (a,b) =>{
           addCommentForm.classList.add('add-form');
         })
       };
+
+      // export const loginUser = (login, password)=>{
+      //   addCommentForm.classList.add('hidden');
+      //   fetch ("https://webdev-hw-api.vercel.app/api/v2/:Dmitriy/login", {
+      //     method: "POST",
+      //     body: JSON.stringify({
+      //       login,
+      //       password,
+      //     }),
+      //   })
+      //   .then((response) => {
+      //       return response.json();
+      //     });
+      // }

@@ -9,6 +9,8 @@ import { renderComments } from "./rendercomments.js";
 import { funcGetComment } from "./api.js";
 import { addComment } from "./api.js";
 
+renderComments();
+
 funcGetComment();
 
 funcGetComment('Пожалуйста подождите комментарии загружаются . . . ', '');
