@@ -3,8 +3,8 @@ const addCommentForm = document.getElementById("addForm");
 const loaderTextDown= document.getElementById("loaderSetDown");
 const inputs = document.querySelectorAll('#name-input, #comment-input'); //для отчистки формы ввода после отправки данных
 
-
-import {token, renderComments} from "./rendercomments.js";
+const commentInputElement = document.getElementById("comment-input");
+import {token, renderComments } from "./rendercomments.js";
 export let comments = [];
 
 export const funcGetComment = (a,b) =>{

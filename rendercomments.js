@@ -81,7 +81,7 @@ return;
 
     buttonElement.addEventListener ("keydown" && "click",  () => {
 
-      if (nameInputElement.value === "" || commentInputElement.value === ""){
+      if (commentInputElement.value === ""){
       buttonElement.disable = "true";
       alert("Длина имени или комментария должна быть не менее 3-х знаков");
       return;
@@ -96,7 +96,8 @@ return;
 
 return;
 }
-
+let textst = commentInputElement.value;
+console.log(textst);
 
 
 // initLikesButton();
