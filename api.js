@@ -9,7 +9,7 @@ export let comments = [];
 
 export const funcGetComment = (a,b) =>{
     loaderText.textContent = a;
-    const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
+    const commentFetch = fetch("https://wedev-api.sky.pro/api/v2/:Dmitriy", {
       method: "GET",
     })
     .then((response) =>{
@@ -39,7 +39,7 @@ export const funcGetComment = (a,b) =>{
     export const addComment = () =>{
         addCommentForm.classList.add('hidden');
         loaderTextDown.textContent = 'Пожалуйста подождите комментарий загружается . . . ';
-        fetch ("https://webdev-hw-api.vercel.app/api/v1/:Dmitriy/comments", {
+        fetch ("https://wedev-api.sky.pro/api/v2/:Dmitriy/comments", {
         method: "POST",
         body: JSON.stringify({
           name: nameInputElement.value
