@@ -4,9 +4,9 @@ const loaderTextDown= document.getElementById("loaderSetDown");
 const inputs = document.querySelectorAll('#name-input, #comment-input'); //для отчистки формы ввода после отправки данных
 
 import { commentInputElement, nameInputElement } from "./script.js";
-import { renderComments } from "./rendercomments.js";
+import {token, renderComments } from "./rendercomments.js";
 export let comments = [];
-let token =  "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k"
+
 export const funcGetComment = (a,b) =>{
     loaderText.textContent = a;
     const commentFetch = fetch("https://wedev-api.sky.pro/api/v2/:Dmitriy/comments", {
@@ -53,16 +53,16 @@ export const funcGetComment = (a,b) =>{
     // }
 
     export const addComment = () =>{
-        addCommentForm.classList.add('hidden');
-        loaderTextDown.textContent = 'Пожалуйста подождите комментарий загружается . . . ';
+        // addCommentForm.classList.add('hidden');
+        // loaderTextDown.textContent = 'Пожалуйста подождите комментарий загружается . . . ';
         fetch ("https://wedev-api.sky.pro/api/v2/:Dmitriy/comments", {
         method: "POST",
         body: JSON.stringify({
-          name: nameInputElement.value
-          .replaceAll("&", "&amp;")
-          .replaceAll("<", "&lt;")
-          .replaceAll(">", "&gt;")
-          .replaceAll('"', "&quot;"),
+          // name: nameInputElement.value
+          // .replaceAll("&", "&amp;")
+          // .replaceAll("<", "&lt;")
+          // .replaceAll(">", "&gt;")
+          // .replaceAll('"', "&quot;"),
           text: commentInputElement.value
           .replaceAll("&", "&amp;")
           .replaceAll("<", "&lt;")
@@ -104,8 +104,8 @@ export const funcGetComment = (a,b) =>{
           funcGetComment();
       
       //////////////////////
-          loaderTextDown.textContent = '';
-          addCommentForm.classList.remove('hidden');
-          addCommentForm.classList.add('add-form');
+          // loaderTextDown.textContent = '';
+          // addCommentForm.classList.remove('hidden');
+          // addCommentForm.classList.add('add-form');
         })
       };

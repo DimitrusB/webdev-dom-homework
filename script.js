@@ -7,7 +7,7 @@ export const commentInputElement = document.getElementById("comment-input");
 import { comments } from "./api.js";
 import { renderComments } from "./rendercomments.js"; 
 import { funcGetComment } from "./api.js";
-import { addComment } from "./api.js";
+// import { addComment } from "./api.js";
 
 funcGetComment();
 
@@ -57,21 +57,13 @@ export const initLikesButton = () => {
 
 renderComments();
 
-buttonElement.addEventListener ("keydown" && "click",  () => {
 
-  if (nameInputElement.value === "" || commentInputElement.value === ""){
-  buttonElement.disable = "true";
-  alert("Длина имени или комментария должна быть не менее 3-х знаков");
-  return;
-  }
-  addComment();
-  renderComments();
 
-});
+
 //===========================//
-  const delLastComment = () =>{
+ export const delLastComment = () =>{
     comments.pop();
     renderComments();
   };
 
-  buttonDelElement.addEventListener ("click", delLastComment); 
+
