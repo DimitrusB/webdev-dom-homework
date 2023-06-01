@@ -9,7 +9,7 @@ export let comments = [];
 
 export const funcGetComment = (a,b) =>{
     loaderText.textContent = a;
-    const commentFetch = fetch("https://wedev-api.sky.pro/api/v2/:Dmitriy", {
+    const commentFetch = fetch("https://wedev-api.sky.pro/api/v2/:Dmitriy/comments", {
       method: "GET",
     })
     .then((response) =>{
