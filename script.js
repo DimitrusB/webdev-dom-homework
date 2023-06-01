@@ -11,9 +11,10 @@ import { addComment } from "./api.js";
 
 renderComments();
 
-funcGetComment();
 
-funcGetComment('Пожалуйста подождите комментарии загружаются . . . ', '');
+
+
+// funcGetComment('Пожалуйста подождите комментарии загружаются . . . ', '');
 
 
 export const commentTextInt = () =>{

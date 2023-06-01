@@ -1,17 +1,19 @@
 import { initLikesButton } from "./script.js";
 import { commentTextInt } from "./script.js";
-import { comments } from "./api.js";
+import { comments, funcGetComment } from "./api.js";
 const listElement = document.getElementById("list"); 
 const loaderText= document.getElementById("loaderSet");
 const addCommentForm = document.getElementById("addForm");
 const loaderTextDown= document.getElementById("loaderSetDown");
+import { loginUser } from "./api.js";
 
 
 export const renderComments = () =>{
-
+  const loginUse = document.getElementById('login-input');
+  const passwordUser = document.getElementById('password-input');
   const appEl = document.getElementById('loginInput');
 
-  const commentsHtml = comments.map((comm, index) =>{
+ const commentsHtml = comments.map((comm, index) =>{
     return     `<li class="comment">
     <div class="comment-header">
       <div>
@@ -81,4 +83,10 @@ export const renderComments = () =>{
     appEl.innerHTML = inEl;
     // initLikesButton();
     // commentTextInt();
+    document.getElementById('login-button').addEventListener('click', () =>{
+      loginUser ({loginUse, passwordUser}).value;
+      console.log(login);
+    });
+    funcGetComment();
+    
   };

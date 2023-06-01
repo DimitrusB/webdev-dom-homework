@@ -7,13 +7,13 @@ import { commentInputElement, nameInputElement } from "./script.js";
 import { renderComments } from "./rendercomments.js";
 export let comments = [];
 
-export const funcGetComment = (a,b) =>{
-    loaderText.textContent = a;
-    const commentFetch = fetch("https://webdev-hw-api.vercel.app/api/v2/:Dmitriy/comments", {
+export const funcGetComment = () =>{
+    // loaderText.textContent = a;
+    const commentFetch = fetch("https://wedev-api.sky.pro/api/v2/:Dm", {
       method: "GET",
       headers: {
-      Authorization:"Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k",
-      },
+        Authorization : token,
+      }
     })
     .then((response) =>{
       if (response.status === 401) {
@@ -37,15 +37,30 @@ export const funcGetComment = (a,b) =>{
         });
         comments = remComments;
         renderComments();
-        loaderText.textContent = b;
+        // loaderText.textContent = b;
       });
     };
 
+    export function loginUser ({login, password}) {
+      return fetch("https://wedev-api.sky.pro/api/user/login", {
+          method: "POST",
+          body: JSON.stringify({
+           login,
+           password,
+          }),
+        })
+          .then((response) => {
+            if (response.status === 400){
+            throw new Error('Неверный логин или пароль');
+            }
+            return response.json();
+          });
+    }
 
     export const addComment = () =>{
         addCommentForm.classList.add('hidden');
         loaderTextDown.textContent = 'Пожалуйста подождите комментарий загружается . . . ';
-        fetch ("https://webdev-hw-api.vercel.app/api/v2/:Dmitriy/comments", {
+        fetch ("https://wedev-api.sky.pro/api/v2/:Dm/comments", {
         method: "POST",
         body: JSON.stringify({
           name: nameInputElement.value
