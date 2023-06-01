@@ -6,7 +6,7 @@ const inputs = document.querySelectorAll('#name-input, #comment-input'); //дл�
 import { commentInputElement, nameInputElement } from "./script.js";
 import { renderComments } from "./rendercomments.js";
 export let comments = [];
-
+let token =  "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k"
 export const funcGetComment = (a,b) =>{
     loaderText.textContent = a;
     const commentFetch = fetch("https://wedev-api.sky.pro/api/v2/:Dmitriy/comments", {
@@ -35,22 +35,22 @@ export const funcGetComment = (a,b) =>{
       });
     };
 
-    export function loginUser ({login, password}) {
-      return fetch("https://wedev-api.sky.pro/api/user/login", {
-          method: "POST",
-          body: JSON.stringify({
-           login,
-           password,
-          }),
+    // export function loginUser ({login, password}) {
+    //   return fetch("https://wedev-api.sky.pro/api/user/login", {
+    //       method: "POST",
+    //       body: JSON.stringify({
+    //        login,
+    //        password,
+    //       }),
     
-        })
-          .then((response) => {
-            if (response.status === 400){
-            throw new Error('Неверный логин или пароль');
-            }
-            return response.json();
-          });
-    }
+    //     })
+    //       .then((response) => {
+    //         if (response.status === 401){
+    //         throw new Error('Неверный логин или пароль');
+    //         }
+    //         return response.json();
+    //       });
+    // }
 
     export const addComment = () =>{
         addCommentForm.classList.add('hidden');
@@ -70,6 +70,9 @@ export const funcGetComment = (a,b) =>{
           .replaceAll('"', "&quot;"),
           forceError: true,
         }),
+        headers: {
+          Authorization: token,
+        },
       })
       .then((response) => {
         if (response.status === 201 || response.status === 200 ){
