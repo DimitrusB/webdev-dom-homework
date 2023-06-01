@@ -1,12 +1,13 @@
-import {initLikesButton } from "./script.js";
+import {commentInputElement, initLikesButton, nameInputElement } from "./script.js";
 import { delLastComment, commentTextInt } from "./script.js";
 import {addComment, comments } from "./api.js";
 const loginButt = document.getElementById('loginBut');
-
+const withoutLogin = document.getElementById('withoutLogin');
 export let token =  null
 
 export const renderComments = () =>{
    const appEl = document.getElementById('app');
+
 
 
 
@@ -34,6 +35,8 @@ export const renderComments = () =>{
     `;
       }).join('');
 
+
+
 if (!token){
     commentsHtml;
 
@@ -55,11 +58,6 @@ return;
       </ul>
       <p id = "loaderSetDown"></p>
       <div class="add-form" id ="addForm">
-        <input id="name-input"
-          type="text"
-          class="add-form-name"
-          placeholder="Введите ваше имя"
-        />
         <textarea id="comment-input"
           type="textarea"
           class="add-form-text"
@@ -78,7 +76,7 @@ return;
 
     appEl.innerHTML = renderHtml;
     const buttonElement = document.getElementById('add-button');
-    const nameInputElement = document.getElementById("name-input");
+    // const nameInputElement = document.getElementById("name-input");
     const commentInputElement = document.getElementById("comment-input");
 
     buttonElement.addEventListener ("keydown" && "click",  () => {
@@ -107,3 +105,4 @@ return;
 // renderComments();
   };
 
+// export {commentInputElement, commmentNew};
