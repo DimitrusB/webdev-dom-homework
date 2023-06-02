@@ -1,5 +1,5 @@
 
-const buttonDelElement = document.getElementById('del-button');
+
 const buttonElement = document.getElementById('add-button');
 export const nameInputElement = document.getElementById("name-input");
 export const commentInputElement = document.getElementById("comment-input");

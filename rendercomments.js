@@ -1,9 +1,12 @@
-import {commentInputElement, initLikesButton, nameInputElement } from "./script.js";
+import {initLikesButton, nameInputElement } from "./script.js";
 import { delLastComment, commentTextInt } from "./script.js";
 import {addComment, comments } from "./api.js";
 const loginButt = document.getElementById('loginBut');
 const withoutLogin = document.getElementById('withoutLogin');
-export let token =  null
+export const cantComment = document.getElementById('commentCan');
+export let token =  null;
+export let commentInputElement =null;
+export let addCommentForm = null;
 
 export const renderComments = () =>{
    const appEl = document.getElementById('app');
@@ -32,18 +35,23 @@ export const renderComments = () =>{
       </div>
     </div>
     </li>
+    <br>
     `;
       }).join('');
 
-
+withoutLogin.addEventListener('click', () =>{
+  cantComment.classList.add('hidden');
+  appEl.innerHTML = commentsHtml;
+})
 
 if (!token){
     commentsHtml;
 
-    appEl.innerHTML = commentsHtml;
+    
     loginButt.addEventListener('click', () =>{
       token =  "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
-  renderComments();
+      appEl.innerHTML = commentsHtml;
+    renderComments();
       });
 
 
@@ -77,13 +85,16 @@ return;
     appEl.innerHTML = renderHtml;
     const buttonElement = document.getElementById('add-button');
     // const nameInputElement = document.getElementById("name-input");
-    const commentInputElement = document.getElementById("comment-input");
+    commentInputElement = document.getElementById("comment-input");
+    const buttonDelElement = document.getElementById('del-button');
+    addCommentForm = document.getElementById("addForm");
 
     buttonElement.addEventListener ("keydown" && "click",  () => {
 
       if (commentInputElement.value === ""){
+        console.log(`${commentInputElement.value}`);
       buttonElement.disable = "true";
-      alert("Длина имени или комментария должна быть не менее 3-х знаков");
+      alert("Длина комментария должна быть не менее 3-х знаков");
       return;
       }
       addComment();
@@ -96,8 +107,6 @@ return;
 
 return;
 }
-let textst = commentInputElement.value;
-console.log(textst);
 
 
 // initLikesButton();

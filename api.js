@@ -1,10 +1,8 @@
 const loaderText= document.getElementById("loaderSet");
-const addCommentForm = document.getElementById("addForm");
 const loaderTextDown= document.getElementById("loaderSetDown");
 const inputs = document.querySelectorAll('#name-input, #comment-input'); //для отчистки формы ввода после отправки данных
 
-const commentInputElement = document.getElementById("comment-input");
-import {token, renderComments } from "./rendercomments.js";
+import { token, cantComment, renderComments, commentInputElement, addCommentForm } from "./rendercomments.js";
 export let comments = [];
 
 export const funcGetComment = (a,b) =>{
@@ -35,26 +33,27 @@ export const funcGetComment = (a,b) =>{
       });
     };
 
-    // export function loginUser ({login, password}) {
-    //   return fetch("https://wedev-api.sky.pro/api/user/login", {
-    //       method: "POST",
-    //       body: JSON.stringify({
-    //        login,
-    //        password,
-    //       }),
+    export function loginUser ({login, password}) {
+      return fetch("https://wedev-api.sky.pro/api/user/login", {
+          method: "POST",
+          body: JSON.stringify({
+           login,
+           password,
+          }),
     
-    //     })
-    //       .then((response) => {
-    //         if (response.status === 401){
-    //         throw new Error('Неверный логин или пароль');
-    //         }
-    //         return response.json();
-    //       });
-    // }
+        })
+          .then((response) => {
+            if (response.status === 400){
+            throw new Error('Неверный логин или пароль');
+            }
+            return response.json();
+          });
+    }
 
     export const addComment = () =>{
-        // addCommentForm.classList.add('hidden');
-        // loaderTextDown.textContent = 'Пожалуйста подождите комментарий загружается . . . ';
+      
+        addCommentForm.classList.add('hidden');
+        loaderTextDown.textContent = 'Пожалуйста подождите комментарий загружается . . . ';
         fetch ("https://wedev-api.sky.pro/api/v2/:Dm/comments", {
         method: "POST",
         body: JSON.stringify({
@@ -68,7 +67,7 @@ export const funcGetComment = (a,b) =>{
           .replaceAll("<", "&lt;")
           .replaceAll(">", "&gt;")
           .replaceAll('"', "&quot;"),
-          forceError: false,
+          forceError: true,
         }),
         headers: {
           Authorization: token,
@@ -76,6 +75,7 @@ export const funcGetComment = (a,b) =>{
       })
       .then((response) => {
         if (response.status === 201 || response.status === 200 ){
+          cantComment.classList.add('hidden');
           inputs.forEach(input => {
             input.value = '';
           });
@@ -104,8 +104,8 @@ export const funcGetComment = (a,b) =>{
           funcGetComment();
       
       //////////////////////
-          // loaderTextDown.textContent = '';
-          // addCommentForm.classList.remove('hidden');
-          // addCommentForm.classList.add('add-form');
+          loaderTextDown.textContent = '';
+          addCommentForm.classList.remove('hidden');
+          addCommentForm.classList.add('add-form');
         })
       };
