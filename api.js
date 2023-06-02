@@ -69,7 +69,17 @@ export const funcGetComment = (a,b) =>{
           
         });
   }
-
+  export function delComm(token, id) {
+    return fetch("https://wedev-api.sky.pro/api/v2/:Dm/comments" + id, {
+        method: "DELETE",
+        headers: {
+          Authorization: token,
+        },
+      })
+        .then((response) => {
+          return response.json();
+        });
+}
     export const addComment = () =>{
 
         addCommentForm.classList.add('hidden');
