@@ -215,10 +215,4 @@ return;
 }
 
 
-
-
-// const listElement = document.getElementById("list"); 
-
   };
-  // renderComments();
-// export {commentInputElement, commmentNew};
