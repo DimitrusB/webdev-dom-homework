@@ -1,6 +1,6 @@
 import {initLikesButton, nameInputElement } from "./script.js";
 import { delLastComment} from "./script.js";
-import {addComment, comments, loginUser } from "./api.js";
+import {addComment, comments, loginUser, regUser } from "./api.js";
 const loginButt = document.getElementById('loginBut');
 const withoutLogin = document.getElementById('withoutLogin');
 const buttonReg = document.getElementById('registration');
@@ -38,44 +38,56 @@ export const renderComments = () =>{
     </div>
     </li>
     <br>
+
     `;
       }).join('');
 
       buttonReg.addEventListener('click', () => {
-const regTask = `
-<div class="container">
-<div>
-          <input id="nameReg"
-          type="text" class="add-form-text"
-          placeholder="Введите ваше имя"/>
-          </div>
-          <div>
-          <input id="passwordReg"
-          <input id="loginReg"
-          type="text" class="add-form-text"
-          placeholder="Введите ваш логин"/>
-          </div>
-          <div>
-          <input id="passwordReg"
-          type="password" class="add-form-text"
-          placeholder="Введите ваш пароль"/>
-          </div>
-          <div>
-          <button class="add-form-button" id="regBut">Регистрация</button>
-        </div>
-        </div>
-`
-appEl.innerHTML = regTask;
-cantComment.classList.add('hidden');
-
+      const regTask = `
+      <div class="container">
+      <div>
+                <input id="nameReg"
+                type="text" class="add-form-text"
+                placeholder="Введите ваше имя"/>
+                </div>
+                <div>
+                <input id="loginReg"
+                type="text" class="add-form-text"
+                placeholder="Введите ваш логин"/>
+                </div>
+                <div>
+                <input id="passwordReg"
+                type="password" class="add-form-text"
+                placeholder="Введите ваш пароль"/>
+                </div>
+                <div>
+                <button class="add-form-button" id="regBut">Регистрация</button>
+                <button class="add-form-button" id="extButton">Выход</button>
+              </div>
+              </div>
+      `
+      appEl.innerHTML = regTask;
+      cantComment.classList.add('hidden');
+const exitReg = document.getElementById('extButton');
 const loginReg = document.getElementById('loginReg');
 const nameReg = document.getElementById('nameReg');
 const passwordReg = document.getElementById('passwordReg');
 const regBut = document.getElementById('regBut');
 
+exitReg.addEventListener('click', () =>{
+  location.reload();
+});
+
 regBut.addEventListener('click', () =>{
-  
-})
+  regUser({
+    login: loginReg.value,
+    password: passwordReg.value,
+    name: nameReg.value,
+  })
+.then(() =>{
+location.reload();
+});
+});
       });
 
 withoutLogin.addEventListener('click', () =>{

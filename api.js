@@ -51,7 +51,7 @@ export const funcGetComment = (a,b) =>{
           });
     }
     export function regUser ({login, password, name}) {
-      return fetch("https://wedev-api.sky.pro/api/user/login", {
+      return fetch("https://wedev-api.sky.pro/api/user", {
           method: "POST",
           body: JSON.stringify({
            login,
@@ -62,9 +62,11 @@ export const funcGetComment = (a,b) =>{
         })
         .then((response) => {
           if (response.status === 400){
+            alert('Пользователь уже существует');
           throw new Error('Пользователь уже существует');
           }
           return response.json();
+          
         });
   }
 
