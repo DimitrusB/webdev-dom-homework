@@ -44,6 +44,7 @@ export const funcGetComment = (a,b) =>{
         })
           .then((response) => {
             if (response.status === 400){
+              alert('Неверные данные');
             throw new Error('Неверный логин или пароль');
             }
             return response.json();
@@ -57,17 +58,12 @@ export const funcGetComment = (a,b) =>{
         fetch ("https://wedev-api.sky.pro/api/v2/:Dm/comments", {
         method: "POST",
         body: JSON.stringify({
-          // name: nameInputElement.value
-          // .replaceAll("&", "&amp;")
-          // .replaceAll("<", "&lt;")
-          // .replaceAll(">", "&gt;")
-          // .replaceAll('"', "&quot;"),
           text: commentInputElement.value
           .replaceAll("&", "&amp;")
           .replaceAll("<", "&lt;")
           .replaceAll(">", "&gt;")
           .replaceAll('"', "&quot;"),
-          forceError: true,
+          forceError: false,
         }),
         headers: {
           Authorization: token,

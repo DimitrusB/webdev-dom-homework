@@ -1,11 +1,7 @@
-
-
-const buttonElement = document.getElementById('add-button');
 export const nameInputElement = document.getElementById("name-input");
-export const commentInputElement = document.getElementById("comment-input");
 
 import { comments } from "./api.js";
-import { renderComments } from "./rendercomments.js"; 
+import { renderComments} from "./rendercomments.js"; 
 import { funcGetComment } from "./api.js";
 // import { addComment } from "./api.js";
 
@@ -14,16 +10,16 @@ funcGetComment();
 funcGetComment('Пожалуйста подождите комментарии загружаются . . . ', '');
 
 
-export const commentTextInt = () =>{
-const commentText = document.querySelectorAll('.comment');
-commentText.forEach((element,index) => 
-  element.addEventListener('click', () =>{
-    const commentTry = ` > ${comments[index].comment} \n ${comments[index].name} \n`;
-commentInputElement.value= commentTry;
-renderComments();
-  })
-);
-};
+// export const commentTextInt = () =>{
+// // const commentText = document.querySelectorAll('.comment');
+// commentText.forEach((element,index) => 
+//   element.addEventListener('click', () =>{
+//     const commentTry = ` > ${comments[index].comment} \n ${comments[index].name} \n`;
+// commentInputElement.value= commentTry;
+// renderComments();
+//   })
+// );
+// };
 
 function delay(interval = 300) {
   return new Promise((resolve) => {

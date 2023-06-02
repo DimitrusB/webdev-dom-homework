@@ -1,8 +1,9 @@
 import {initLikesButton, nameInputElement } from "./script.js";
-import { delLastComment, commentTextInt } from "./script.js";
-import {addComment, comments } from "./api.js";
+import { delLastComment} from "./script.js";
+import {addComment, comments, loginUser } from "./api.js";
 const loginButt = document.getElementById('loginBut');
 const withoutLogin = document.getElementById('withoutLogin');
+
 export const cantComment = document.getElementById('commentCan');
 export let token =  null;
 export let commentInputElement =null;
@@ -49,12 +50,31 @@ if (!token){
 
     
     loginButt.addEventListener('click', () =>{
-      token =  "Bearer asb4c4boc86gasb4c4boc86g37w3cc3bo3b83k4g37k3bk3cg3c03ck4k";
-      appEl.innerHTML = commentsHtml;
-    renderComments();
-      });
+      const loginPlace = document.getElementById('login-input');
+      const passwordPlace = document.getElementById('password-input');
+    
+      if(!loginPlace.value){
+        alert('Заполните имя');
+        return;
+      }
 
-
+    if(!passwordPlace.value){
+      alert('Заполните пароль');
+      return;
+    }
+    
+          loginUser({
+            login: loginPlace.value,
+            password: passwordPlace.value,
+          })
+          .then((user) =>{
+            token =  `Bearer ${user.user.token}`;
+            appEl.innerHTML = commentsHtml;
+            renderComments();
+          });
+    
+    
+          });
 return;
 
 }else{
@@ -78,20 +98,20 @@ return;
         <div class="add-form-row">
           <button class="add-form-button" id="del-button">Удалить послединий комментарий</button>
         </div>
+        <button class="add-form-button" id="exit-button">Выход</button>
       </div>
-      <button class="add-form-button" id="exit-button">Выход</button>
+
     </div>
   `;
 
     appEl.innerHTML = renderHtml;
+    const commentText = document.querySelectorAll('.comment');
     const exitButton = document.getElementById('exit-button');
     const buttonElement = document.getElementById('add-button');
-    // const nameInputElement = document.getElementById("name-input");
     commentInputElement = document.getElementById("comment-input");
     const buttonDelElement = document.getElementById('del-button');
     addCommentForm = document.getElementById("addForm");
     cantComment.classList.add('hidden');
-
     exitButton.addEventListener('click', () =>{
       location.reload();
     })
@@ -111,15 +131,27 @@ return;
 
     
     buttonDelElement.addEventListener ("click", delLastComment); 
+    initLikesButton();
+    const commentTextInt = () =>{
+      
+      commentText.forEach((element,index) => 
+        element.addEventListener('click', () =>{
+          const commentTry = ` > ${comments[index].comment} \n ${comments[index].name} \n`;
+      commentInputElement.value= commentTry;
+      renderComments();
+        })
+      );
+      };
 
+    commentTextInt();
 return;
 }
 
 
-// initLikesButton();
-// commentTextInt();
-// const listElement = document.getElementById("list"); 
-// renderComments();
-  };
 
+
+// const listElement = document.getElementById("list"); 
+
+  };
+  // renderComments();
 // export {commentInputElement, commmentNew};
