@@ -3,6 +3,7 @@ import { delLastComment} from "./script.js";
 import {addComment, comments, loginUser } from "./api.js";
 const loginButt = document.getElementById('loginBut');
 const withoutLogin = document.getElementById('withoutLogin');
+const buttonReg = document.getElementById('registration');
 
 export const cantComment = document.getElementById('commentCan');
 export let token =  null;
@@ -39,6 +40,43 @@ export const renderComments = () =>{
     <br>
     `;
       }).join('');
+
+      buttonReg.addEventListener('click', () => {
+const regTask = `
+<div class="container">
+<div>
+          <input id="nameReg"
+          type="text" class="add-form-text"
+          placeholder="Введите ваше имя"/>
+          </div>
+          <div>
+          <input id="passwordReg"
+          <input id="loginReg"
+          type="text" class="add-form-text"
+          placeholder="Введите ваш логин"/>
+          </div>
+          <div>
+          <input id="passwordReg"
+          type="password" class="add-form-text"
+          placeholder="Введите ваш пароль"/>
+          </div>
+          <div>
+          <button class="add-form-button" id="regBut">Регистрация</button>
+        </div>
+        </div>
+`
+appEl.innerHTML = regTask;
+cantComment.classList.add('hidden');
+
+const loginReg = document.getElementById('loginReg');
+const nameReg = document.getElementById('nameReg');
+const passwordReg = document.getElementById('passwordReg');
+const regBut = document.getElementById('regBut');
+
+regBut.addEventListener('click', () =>{
+  
+})
+      });
 
 withoutLogin.addEventListener('click', () =>{
   cantComment.classList.add('hidden');
@@ -108,13 +146,16 @@ return;
     const commentText = document.querySelectorAll('.comment');
     const exitButton = document.getElementById('exit-button');
     const buttonElement = document.getElementById('add-button');
+    
     commentInputElement = document.getElementById("comment-input");
     const buttonDelElement = document.getElementById('del-button');
     addCommentForm = document.getElementById("addForm");
     cantComment.classList.add('hidden');
     exitButton.addEventListener('click', () =>{
       location.reload();
-    })
+    });
+
+
 
     buttonElement.addEventListener ("keydown" && "click",  () => {
 
@@ -141,9 +182,10 @@ return;
       renderComments();
         })
       );
+      commentTextInt();
       };
 
-    commentTextInt();
+
 return;
 }
 
