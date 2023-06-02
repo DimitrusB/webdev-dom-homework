@@ -51,7 +51,7 @@ export const funcGetComment = (a,b) =>{
     }
 
     export const addComment = () =>{
-      
+
         addCommentForm.classList.add('hidden');
         loaderTextDown.textContent = 'Пожалуйста подождите комментарий загружается . . . ';
         fetch ("https://wedev-api.sky.pro/api/v2/:Dm/comments", {
@@ -75,7 +75,7 @@ export const funcGetComment = (a,b) =>{
       })
       .then((response) => {
         if (response.status === 201 || response.status === 200 ){
-          cantComment.classList.add('hidden');
+
           inputs.forEach(input => {
             input.value = '';
           });
@@ -83,6 +83,9 @@ export const funcGetComment = (a,b) =>{
         }
         if (response.status === 400){
           throw new Error("slow words");
+        } 
+        if (response.status === 401){
+          throw new Error("Error Authorization");
         } 
          if (response.status === 500){
           throw new Error("error server");
@@ -94,6 +97,10 @@ export const funcGetComment = (a,b) =>{
         console.warn(error + ": имя и комментарий должен быть больше 3-х символов");
       return ;
       }
+      if (error.message === "Error Authorization"){
+        console.log("Ошибка авторизации");
+       return;
+     }
       if (error.message === "error server"){
          console.log("Сервер упал попробуйте позже");
         addComment();

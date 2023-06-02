@@ -79,15 +79,22 @@ return;
           <button class="add-form-button" id="del-button">Удалить послединий комментарий</button>
         </div>
       </div>
+      <button class="add-form-button" id="exit-button">Выход</button>
     </div>
   `;
 
     appEl.innerHTML = renderHtml;
+    const exitButton = document.getElementById('exit-button');
     const buttonElement = document.getElementById('add-button');
     // const nameInputElement = document.getElementById("name-input");
     commentInputElement = document.getElementById("comment-input");
     const buttonDelElement = document.getElementById('del-button');
     addCommentForm = document.getElementById("addForm");
+    cantComment.classList.add('hidden');
+
+    exitButton.addEventListener('click', () =>{
+      location.reload();
+    })
 
     buttonElement.addEventListener ("keydown" && "click",  () => {
 
