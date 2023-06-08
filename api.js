@@ -4,7 +4,7 @@ const inputs = document.querySelectorAll('#name-input, #comment-input'); //дл�
 import { format } from "date-fns"
 import { token, cantComment, renderComments, commentInputElement, addCommentForm } from "./rendercomments.js";
 export let comments = [];
-
+export let setId = null;
 export const funcGetComment = (a,b) =>{
     loaderText.textContent = a;
     const commentFetch = fetch("https://wedev-api.sky.pro/api/v2/:Dm/comments", {

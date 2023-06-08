@@ -1,6 +1,6 @@
 import {initLikesButton, nameInputElement } from "./script.js";
 import { delLastComment} from "./script.js";
-import {addComment, comments, loginUser, regUser, delComm } from "./api.js";
+import {addComment, comments, loginUser, regUser, delComm, funcGetComment} from "./api.js";
 const loginButt = document.getElementById('loginBut');
 const withoutLogin = document.getElementById('withoutLogin');
 const buttonReg = document.getElementById('registration');
@@ -21,7 +21,7 @@ export const renderComments = () =>{
     <li class="comment">
     <div class="comment-header">
       <div>
-        ${comm.name}
+        ${comm.name} 
       </div>
       <div>${comm.date}</div>
     </div>
@@ -39,21 +39,18 @@ export const renderComments = () =>{
     </div>
     ${token ? `<button class="add-form-button" id="delComment">Удалить</button>` : "" }
     </li>
-    <br>
-
-    `;
+    <br>`;
       }).join('');
 
-// const delComment = document.getElementById('delComment');
+const delComment = document.getElementById('delComment');
+delComment.addEventListener('click', () =>{
 
-// delComment.addEventListener('click', () =>{
+  delComm({
+token: token,
+id: comment.id,
+  })
 
-//   delComm({
-// token: token,
-// id: id,
-//   })
-
-// })
+})
 
       buttonReg.addEventListener('click', () => {
       const regTask = `
