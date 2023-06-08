@@ -1,7 +1,7 @@
 const loaderText= document.getElementById("loaderSet");
 const loaderTextDown= document.getElementById("loaderSetDown");
 const inputs = document.querySelectorAll('#name-input, #comment-input'); //для отчистки формы ввода после отправки данных
-
+import { format } from "date-fns"
 import { token, cantComment, renderComments, commentInputElement, addCommentForm } from "./rendercomments.js";
 export let comments = [];
 
@@ -19,9 +19,10 @@ export const funcGetComment = (a,b) =>{
     })
       .then((responseDataComment) =>{
         const remComments = responseDataComment.comments.map((comment) =>{
+          const createDate = format(new Date(comment.date), 'yyyy-MM-dd hh:mm:ss');
           return{
             name: comment.author.name,
-            date: comment.date.replace(/^(\d+)-(\d+)-(\d+)T(\d+):(\d+):(\d+).(\d+)Z/, `$3.$2.$1 $4:$5:$6`),
+            date: createDate,
             comment: comment.text,
             likes: comment.likes,
             isLiked: false,
