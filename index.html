@@ -7,60 +7,28 @@
   </head>
 
   <body>
+   
     <div class="container">
-      <ul id="list" class="comments">
-        <li class="comment">
-          <div class="comment-header">
-            <div>Глеб Фокин</div>
-            <div>12.02.22 12:18</div>
-          </div>
-          <div  class="comment-body">
-            <div class="comment-text">
-              Это будет первый комментарий на этой странице
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span class="likes-counter">3</span>
-              <button class="like-button"></button>
-            </div>
-          </div>
-        </li>
-        <li class="comment">
-          <div class="comment-header">
-            <div>Варвара Н.</div>
-            <div>13.02.22 19:22</div>
-          </div>
-          <div class="comment-body">
-            <div class="comment-text">
-              Мне нравится как оформлена эта страница! ❤
-            </div>
-          </div>
-          <div class="comment-footer">
-            <div class="likes">
-              <span class="likes-counter">75</span>
-              <button class="like-button -active-like"></button>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <div class="add-form">
-        <input id="name-input"
-          type="text"
-          class="add-form-name"
-          placeholder="Введите ваше имя"
-        />
-        <textarea id="comment-input"
-          type="textarea"
-          class="add-form-text"
-          placeholder="Введите ваш коментарий"
-          rows="4"
-        ></textarea>
-        <div class="add-form-row">
-          <button class="add-form-button" id="add-button">Написать</button>
+<h1>Прокет "Комментарии"</h1>
+      <span id = "loaderSet"></span>
+<div id="app"></div>
+<p id = "loaderSetDown"></p>
+<div class="container" id="commentCan">
+<div>
+          <input id="login-input"
+          type="text" class="add-form-text"
+          placeholder="Введите ваш логин"/>
+          <input id="password-input"
+          type="password" class="add-form-text"
+          placeholder="Введите ваш пароль"/>
         </div>
-        <div class="add-form-row">
-          <button class="add-form-button" id="del-button">Удалить послединий комментарий</button>
+        <div>
+          <button class="add-form-button" id="loginBut">Авторизация</button>
+          <button class="add-form-button" id="registration">Регистрация</button>
+        </div>
+
+        <div>
+          <button class="add-form-button" id="withoutLogin">Без авторизации</button>
         </div>
       </div>
     </div>
@@ -70,6 +38,7 @@
       background-color: rgb(234, 146, 146);
     } */
   </style>
-  <script src="script.js">
-  </script>
-</html>
+  <!-- <script type="module" src="./script.js">  </script>
+  <script type="module" src="./api.js" ></script> -->
+  <script src="./dist/main.js"></script>
+  </html>
