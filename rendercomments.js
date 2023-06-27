@@ -42,15 +42,15 @@ export const renderComments = () =>{
     <br>`;
       }).join('');
 
-const delComment = document.getElementById('delComment');
-delComment.addEventListener('click', () =>{
+// const delComment = document.getElementById('delComment');
+// delComment.addEventListener('click', () =>{
 
-  delComm({
-token: token,
-id: comment.id,
-  })
+//   delComm({
+// token: token,
+// id: comment.id,
+//   })
 
-})
+// })
 
       buttonReg.addEventListener('click', () => {
       const regTask = `
